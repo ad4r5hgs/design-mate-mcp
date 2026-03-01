@@ -8,10 +8,11 @@ A fork of `dpunj/tldraw-mcp` — an MCP server that lets AI agents drive a tldra
 
 ## Development Commands
 
-All commands run from the project root unless noted:
+Each package has its own directory:
 
 ```bash
 # MCP server (stdio — used by Claude Desktop / Cursor)
+cd mcp
 bun run dev        # Run MCP server via tsx
 bun run build      # Build to dist/ via tsup (ESM + .d.ts)
 bun run check      # TypeScript check (no emit)

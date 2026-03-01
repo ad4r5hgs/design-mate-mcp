@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "tldraw-mcp",
+      "name": "designmate-mcp",
       "dependencies": {
         "@modelcontextprotocol/sdk": "^1.25.0",
         "ws": "^8.18.0",

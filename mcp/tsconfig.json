@@ -10,6 +10,6 @@
     "declaration": true,
     "resolveJsonModule": true
   },
-  "include": ["mcp/**/*"],
+  "include": ["**/*"],
   "exclude": ["node_modules", "dist"]
 }
