@@ -1,0 +1,577 @@
+- generic [active] [ref=e1]:
+  - main [ref=e4]:
+    - generic [ref=e6]:
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "turbotax" [ref=e10] [cursor=pointer]:
+            - /url: https://turbotax.intuit.com/?cid=seq_intuit_tt_click_hd
+            - img "TurboTax Logo" [ref=e12]
+            - img "TurboTax Logo" [ref=e16]
+        - listitem [ref=e25]:
+          - link "creditkarma" [ref=e26] [cursor=pointer]:
+            - /url: https://www.creditkarma.com/?source=intuit
+            - img "Credit Karma Logo" [ref=e28]
+            - img "Credit Karma Logo" [ref=e32]
+        - listitem [ref=e44]:
+          - link "quickbooks" [ref=e45] [cursor=pointer]:
+            - /url: https://quickbooks.intuit.com/?sc=seq_intuit_qb_click_hd
+            - img "Quickbooks Logo" [ref=e47]
+            - img "Quickbooks Logo" [ref=e51]
+        - listitem [ref=e62]:
+          - link "mailchimp" [ref=e63] [cursor=pointer]:
+            - /url: https://mailchimp.com/?utm_source=intuit.com&utm_medium=referral
+            - img "Mailchimp Logo" [ref=e65]
+            - img "Mailchimp Logo" [ref=e70]
+      - navigation "Primary" [ref=e72]:
+        - generic [ref=e75]:
+          - generic [ref=e76]:
+            - link "Intuit logo" [ref=e77] [cursor=pointer]:
+              - /url: https://www.intuit.com/
+              - img "Intuit Logo" [ref=e80]
+            - list [ref=e87]:
+              - listitem [ref=e88]:
+                - button "Products" [ref=e89] [cursor=pointer]:
+                  - generic [ref=e90]: Products
+                  - generic [ref=e91]:
+                    - generic:
+                      - img
+              - listitem [ref=e92]:
+                - button "Solutions" [ref=e93] [cursor=pointer]:
+                  - generic [ref=e94]: Solutions
+                  - generic [ref=e95]:
+                    - generic:
+                      - img
+              - listitem [ref=e96]:
+                - button "Support and Blogs" [ref=e97] [cursor=pointer]:
+                  - generic [ref=e98]: Support and Blogs
+                  - generic [ref=e99]:
+                    - generic:
+                      - img
+              - listitem [ref=e100]:
+                - button "Company" [ref=e101] [cursor=pointer]:
+                  - generic [ref=e102]: Company
+                  - generic [ref=e103]:
+                    - generic:
+                      - img
+          - generic [ref=e104]:
+            - generic:
+              - button "EN-US" [ref=e105]:
+                - generic:
+                  - img
+                - generic [ref=e106]:
+                  - generic [ref=e107]: EN-US
+                  - generic:
+                    - img
+              - list "Select Country":
+                - listitem "United States (EN)":
+                  - link "English" [ref=e109] [cursor=pointer]:
+                    - /url: https://www.intuit.com/
+                    - generic [ref=e110]: United States (EN)
+                - listitem "Canada (EN)":
+                  - link "Canada in English" [ref=e112] [cursor=pointer]:
+                    - /url: https://www.intuit.com/ca/
+                    - generic [ref=e113]: Canada (EN)
+                - listitem "Canada (FR)":
+                  - link "Canada in French-Canadian" [ref=e115] [cursor=pointer]:
+                    - /url: https://www.intuit.com/fr-ca/
+                    - generic [ref=e116]: Canada (FR)
+                - listitem "India (EN)":
+                  - link "India in English" [ref=e118] [cursor=pointer]:
+                    - /url: https://www.intuit.com/in/
+                    - generic [ref=e119]: India (EN)
+            - link "Sign in" [ref=e122] [cursor=pointer]:
+              - /url: https://accounts.intuit.com/app/account-manager/overview?piuInFlyout=true&openBlueDot=true&accountSwitcherInFlyout=true&rgn=US&prgn=US
+              - generic [ref=e123]: Sign in
+    - generic [ref=e126]:
+      - generic [ref=e136]:
+        - heading "Outdo your financial goals—all in one place." [level=1] [ref=e141]
+        - generic [ref=e142]:
+          - paragraph [ref=e146]: The Intuit platform puts a team of AI agents and trusted experts by your side.
+          - button "See it in action" [ref=e148]:
+            - generic:
+              - img
+            - generic [ref=e149]: See it in action
+            - generic:
+              - img
+      - img [ref=e159]
+    - generic [ref=e219]:
+      - img "Image Alt Text" [ref=e229]
+      - generic [ref=e230]:
+        - paragraph [ref=e234]: TURBOTAX
+        - heading "Expertise that helps you file smarter" [level=2] [ref=e238]
+        - paragraph [ref=e242]: Personalized, AI-powered answers in real-time as you file. Dedicated tax experts at the ready to file on your behalf. All the support you need, when you need it.
+        - link "Go to TurboTax" [ref=e244] [cursor=pointer]:
+          - /url: https://turbotax.intuit.com/?cid=seq_intuit_turbotax_click_prod_featured
+          - generic [ref=e245]: Go to TurboTax
+          - generic:
+            - img
+      - generic [ref=e247]:
+        - button "Your taxes done right":
+          - generic:
+            - generic:
+              - generic:
+                - generic "Image Title"
+            - paragraph: Your taxes done right
+          - generic:
+            - img
+        - button "Make financial progress" [ref=e248] [cursor=pointer]:
+          - generic [ref=e249]:
+            - generic "Image Title" [ref=e252]
+            - paragraph: Make financial progress
+        - button "Run your business" [ref=e253] [cursor=pointer]:
+          - generic [ref=e254]:
+            - generic "Image Title" [ref=e257]
+            - paragraph: Run your business
+          - generic:
+            - img
+        - button "Grow your business" [ref=e258] [cursor=pointer]:
+          - generic [ref=e259]:
+            - generic "Image Title" [ref=e262]
+            - paragraph: Grow your business
+          - generic:
+            - img
+    - generic [ref=e264]:
+      - heading "How Intuit drives success for" [level=2] [ref=e268]
+      - group "carousel controls" [ref=e269]:
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - button "select Small Businesses" [ref=e274] [cursor=pointer]:
+              - heading "Small Businesses" [level=3] [ref=e275]
+            - button "select Individuals" [ref=e277] [cursor=pointer]:
+              - heading "Individuals" [level=3] [ref=e278]
+            - button "select Mid-Market Businesses" [ref=e280] [cursor=pointer]:
+              - heading "Mid-Market Businesses" [level=3] [ref=e281]
+          - generic [ref=e282]:
+            - button "Small Businesses" [ref=e284] [cursor=pointer]:
+              - heading "Small Businesses" [level=3] [ref=e285]
+            - button "Individuals" [ref=e287] [cursor=pointer]:
+              - heading "Individuals" [level=3] [ref=e288]
+            - button "Mid-Market Businesses" [ref=e290] [cursor=pointer]:
+              - heading "Mid-Market Businesses" [level=3] [ref=e291]
+        - generic [ref=e292]:
+          - button "Previous pill" [ref=e293] [cursor=pointer]:
+            - generic:
+              - img
+          - button "Next pill" [ref=e294] [cursor=pointer]:
+            - generic:
+              - img
+      - region "Small Businesses" [ref=e295]:
+        - generic [ref=e296]:
+          - group "card 1 of 3" [ref=e297]:
+            - generic [ref=e299] [cursor=pointer]:
+              - 'button "play video button, duration: 1:34" [ref=e300]':
+                - generic [ref=e301]:
+                  - generic [ref=e302]:
+                    - generic:
+                      - img
+                  - paragraph [ref=e303]: 1:34
+              - generic [ref=e304]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "Kris Harris, Co-Founder, Nootka Saunas"
+              - list [ref=e305]:
+                - listitem [ref=e306]:
+                  - img "Quickbooks Logo" [ref=e309]
+              - paragraph [ref=e315]: Meet Kris. He and his team handcraft each sauna with care. Having a financial tool that saves them time means they can focus on their craft.
+              - link "Read his story" [ref=e316]:
+                - /url: "https://quickbooks.intuit.com/r/running-a-business/i-run-this-kris-harris/ "
+                - generic [ref=e317]: Read his story
+          - group "card 2 of 3" [ref=e318]:
+            - generic [ref=e320] [cursor=pointer]:
+              - generic [ref=e321]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A photo of Intuit customer, Anna Seear, president and co-founder of Ritual Chocolate"
+              - list [ref=e322]:
+                - listitem [ref=e323]:
+                  - img "Quickbooks Logo" [ref=e326]
+                - listitem [ref=e329]:
+                  - img "Mailchimp Logo" [ref=e332]
+              - paragraph [ref=e339]: Meet Anna. She compares the quality of her cacao to the grapes of a fine wine.
+              - link "Read her story" [ref=e340]:
+                - /url: https://quickbooks.intuit.com/r/running-a-business/ritual-chocolate-mailchimp-quickbooks/
+                - generic [ref=e341]: Read her story
+          - group "card 3 of 3" [ref=e342]:
+            - generic [ref=e344] [cursor=pointer]:
+              - generic [ref=e345]:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A photo of Howard Hsu, Co-Founder of Sweet Auburn Barbeque"
+              - list [ref=e346]:
+                - listitem [ref=e347]:
+                  - img "Mailchimp Logo" [ref=e350]
+              - paragraph [ref=e357]: Meet Howard. He values community-building, and SMS helps him get timely deals in the hands of his customers—just in time for dinner.
+              - link "Read his story" [ref=e358]:
+                - /url: https://mailchimp.com/case-studies/sweet-auburn-bbq-wix-integration-sms-marketing/
+                - generic [ref=e359]: Read his story
+    - region "<div class=\"resp-text-wrapper\"><h2><span class=\"ql-font-heading02 ql-size-medium\">Innovation, action, and impact</span></h2></div>" [ref=e361]:
+      - generic [ref=e363]:
+        - heading "Innovation, action, and impact" [level=2] [ref=e367]
+        - generic [ref=e369]:
+          - generic [ref=e370]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A picture of a blue sky with a white and blue color."
+              - generic:
+                - generic:
+                  - paragraph: Partnership
+                  - paragraph
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading "Intuit Financial Intelligence Comes to Claude via Anthropic" [level=3]
+                - link "Learn more":
+                  - /url: https://www.intuit.com/anthropic/
+                  - generic: Learn more
+          - generic [ref=e371]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A logo lockup of Intuit and OpenAI on a blue gradient background"
+              - generic:
+                - generic:
+                  - paragraph: Partnership
+                  - paragraph
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading "Intuit and OpenAI partner to revolutionize Financial Intelligence" [level=3]
+                - link "Learn more":
+                  - /url: https://www.intuit.com/chatgpt/
+                  - generic: Learn more
+          - generic [ref=e372]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A person on a laptop with pop up UI screens of Intuit AI agents"
+              - generic:
+                - generic:
+                  - paragraph: Press
+                  - paragraph
+                - generic:
+                  - generic:
+                    - generic:
+                      - 'heading "Fast Company: Intuit bets big on AI" [level=3]'
+                      - paragraph: QuickBooks redefines financial management
+                - link "Read the story":
+                  - /url: https://www.fastcompany.com/91359079/intuit-bets-big-on-ai-to-boost-efficiency-and-trust-in-quickbooks
+                  - generic: Read the story
+          - generic [ref=e373]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "3 circle bubbles, with 2 featuring a person imitating as if they were talking to each other and the 3rd circle bubble is a logo of Intuit Assist"
+              - generic:
+                - generic:
+                  - paragraph: Innovation
+                  - paragraph
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading "Meet your virtual team—AI agents and human experts" [level=3]
+                - link "See it in action":
+                  - /url: https://quickbooks.intuit.com/r/product-update/innovation-agentic-ai-2025/
+                  - generic: See it in action
+          - button "Investors Intuit hosts Investor Day, reaffirms first-quarter and fiscal 2026 guidance Read investor news" [ref=e375] [cursor=pointer]:
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - generic [ref=e379]:
+                  - paragraph [ref=e380]: Investors
+                  - paragraph
+                - heading "Intuit hosts Investor Day, reaffirms first-quarter and fiscal 2026 guidance" [level=3] [ref=e384]
+              - link "Read investor news" [ref=e386]:
+                - /url: https://investors.intuit.com/news-events/press-releases/detail/1271/intuit-hosts-investor-day-reaffirms-first-quarter-and-fiscal-2026-guidance
+                - generic [ref=e387]: Read investor news
+          - generic [ref=e388]:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A UI screen of Intuit's Accounting Agent against a blue background"
+              - generic:
+                - generic:
+                  - paragraph: Innovation
+                  - paragraph
+                - generic:
+                  - generic:
+                    - generic:
+                      - heading "Delivering done-for-you agentic AI experiences for millions of business owners" [level=3]
+                - link "Read the story":
+                  - /url: https://www.intuit.com/blog/innovative-thinking/delivering-done-for-you/
+                  - generic: Read the story
+          - link "See all stories" [ref=e390] [cursor=pointer]:
+            - /url: https://www.intuit.com/blog/
+            - generic [ref=e391]:
+              - heading "See all stories" [level=3] [ref=e392]
+              - generic [ref=e393]:
+                - generic:
+                  - img
+        - generic [ref=e394]:
+          - paragraph [ref=e395]: 1 of 3
+          - generic [ref=e398]:
+            - button "move carousel backward" [disabled] [ref=e399] [cursor=pointer]:
+              - generic:
+                - img
+            - button "move carousel forward" [ref=e400] [cursor=pointer]:
+              - generic:
+                - img
+    - generic [ref=e403]:
+      - heading "Driving success together" [level=2] [ref=e407]
+      - generic [ref=e408]:
+        - link "Work with us" [ref=e409] [cursor=pointer]:
+          - /url: https://www.intuit.com/careers/
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A woman in red smiling"
+          - heading "Work with us" [level=3] [ref=e414]
+          - button "Work with us" [ref=e415]:
+            - generic:
+              - img
+        - link "Learn about us" [ref=e416] [cursor=pointer]:
+          - /url: https://www.intuit.com/company/
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A person sitting on a bench with a laptop in his lap."
+          - heading "Learn about us" [level=3] [ref=e421]
+          - button "Learn about us" [ref=e422]:
+            - generic:
+              - img
+        - link "Build with us" [ref=e423] [cursor=pointer]:
+          - /url: https://www.intuit.com/technology/
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - img "A man looking straight away from his computer monitor"
+          - heading "Build with us" [level=3] [ref=e428]
+          - button "Build with us" [ref=e429]:
+            - generic:
+              - img
+    - contentinfo [ref=e432]:
+      - generic [ref=e433]:
+        - generic [ref=e435]:
+          - generic [ref=e437]:
+            - generic: Company
+            - generic [ref=e438]:
+              - link "About Intuit" [ref=e440] [cursor=pointer]:
+                - /url: https://www.intuit.com/company/
+                - generic [ref=e442]: About Intuit
+              - link "Investor Relations" [ref=e444] [cursor=pointer]:
+                - /url: https://investors.intuit.com
+                - generic [ref=e446]: Investor Relations
+              - link "Corporate Responsibility" [ref=e448] [cursor=pointer]:
+                - /url: https://www.intuit.com/company/corporate-responsibility/
+                - generic [ref=e450]: Corporate Responsibility
+              - link "Partner with Intuit" [ref=e452] [cursor=pointer]:
+                - /url: https://www.intuit.com/partners/
+                - generic [ref=e454]: Partner with Intuit
+              - link "Contact Us" [ref=e456] [cursor=pointer]:
+                - /url: https://www.intuit.com/company/contact
+                - generic [ref=e458]: Contact Us
+              - link "Customer Research" [ref=e460] [cursor=pointer]:
+                - /url: https://www.intuit.com/products/user-research
+                - generic [ref=e462]: Customer Research
+          - generic [ref=e464]:
+            - generic: For Individuals
+            - generic [ref=e465]:
+              - link "TurboTax" [ref=e467] [cursor=pointer]:
+                - /url: https://turbotax.intuit.com/?cid=seq_intuit_tt_click_ft
+                - generic [ref=e469]: TurboTax
+              - link "TurboTax Live" [ref=e471] [cursor=pointer]:
+                - /url: https://turbotax.intuit.com/personal-taxes/online/live/full-service/
+                - generic [ref=e473]: TurboTax Live
+              - link "Credit Karma" [ref=e475] [cursor=pointer]:
+                - /url: https://www.creditkarma.com/
+                - generic [ref=e477]: Credit Karma
+              - link "Credit Cards" [ref=e479] [cursor=pointer]:
+                - /url: https://www.creditkarma.com/credit-cards
+                - generic [ref=e481]: Credit Cards
+              - link "Personal Loans" [ref=e483] [cursor=pointer]:
+                - /url: https://www.creditkarma.com/personal-loans/shop
+                - generic [ref=e485]: Personal Loans
+              - link "Auto Loans" [ref=e487] [cursor=pointer]:
+                - /url: https://www.creditkarma.com/shop/autos
+                - generic [ref=e489]: Auto Loans
+              - link "Home Loans" [ref=e491] [cursor=pointer]:
+                - /url: https://www.creditkarma.com/home-loans/mortgage-rates
+                - generic [ref=e493]: Home Loans
+              - link "QuickBooks Solopreneur" [ref=e495] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/solopreneur/?sc=seq_intuit_qbse_click_ft
+                - generic [ref=e497]: QuickBooks Solopreneur
+          - generic [ref=e499]:
+            - generic: For Small Business
+            - generic [ref=e500]:
+              - link "QuickBooks" [ref=e502] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/?sc=seq_intuit_qb_click_ft
+                - generic [ref=e504]: QuickBooks
+              - link "Accounting Software" [ref=e506] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/accounting/?sc=seq_intuit_qbo_click_ft
+                - generic [ref=e508]: Accounting Software
+              - link "Payroll" [ref=e510] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/payroll?sc=seq_intuit_qbpayroll_click_ft
+                - generic [ref=e512]: Payroll
+              - link "Online Payments" [ref=e514] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/payments/?sc=seq_intuit_pay_click_ft
+                - generic [ref=e516]: Online Payments
+              - link "Invoicing Software" [ref=e518] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/accounting/invoicing/
+                - generic [ref=e520]: Invoicing Software
+              - link "Time Tracking" [ref=e522] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/time-tracking/?sc=seq_intuit_qb_time_click_ft
+                - generic [ref=e524]: Time Tracking
+              - link "Term Loans" [ref=e526] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/business-banking/loans/term-loans/?sc=seq_intuit_qb_qbcapital_click_ft
+                - generic [ref=e528]: Term Loans
+              - link "Line of Credit" [ref=e530] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/business-banking/loans/line-of-credit/
+                - generic [ref=e532]: Line of Credit
+              - link "Bookkeeper Services" [ref=e534] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/live/
+                - generic [ref=e536]: Bookkeeper Services
+              - link "Mailchimp" [ref=e538] [cursor=pointer]:
+                - /url: https://mailchimp.com/?utm_source=intuit.com&utm_medium=referral
+                - generic [ref=e540]: Mailchimp
+              - link "TurboTax Live for Business" [ref=e542] [cursor=pointer]:
+                - /url: https://turbotax.intuit.com/personal-taxes/online/live/full-service/business-taxes/
+                - generic [ref=e544]: TurboTax Live for Business
+          - generic [ref=e546]:
+            - generic: For Accountants
+            - generic [ref=e547]:
+              - link "Lacerte Tax" [ref=e549] [cursor=pointer]:
+                - /url: https://accountants.intuit.com/tax-software/lacerte/
+                - generic [ref=e551]: Lacerte Tax
+              - link "ProConnect Tax" [ref=e553] [cursor=pointer]:
+                - /url: https://accountants.intuit.com/tax-software/tax-online/
+                - generic [ref=e555]: ProConnect Tax
+              - link "ProSeries Tax" [ref=e557] [cursor=pointer]:
+                - /url: https://accountants.intuit.com/tax-software/proseries/
+                - generic [ref=e559]: ProSeries Tax
+              - link "QuickBooks Online Accountant" [ref=e561] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/accountants/?sc=Intuit.com&s_ev1=Intuit.com_Footer_QBAccountants
+                - generic [ref=e563]: QuickBooks Online Accountant
+              - link "ProAdvisor Program" [ref=e565] [cursor=pointer]:
+                - /url: https://quickbooks.intuit.com/accountants/proadvisor/?s_cid=Intuit.com&s_ev1=Intuit.com_Footer_ProAdvisors
+                - generic [ref=e567]: ProAdvisor Program
+        - generic [ref=e568]:
+          - generic [ref=e569]:
+            - search [ref=e571]:
+              - textbox "Search" [ref=e572]:
+                - /placeholder: Search this site
+            - paragraph
+          - generic [ref=e573]:
+            - paragraph [ref=e574]:
+              - link "Sitemap" [ref=e575] [cursor=pointer]:
+                - /url: https://www.intuit.com/sitemap/
+                - generic [ref=e576]: Sitemap
+            - button "Select Country" [ref=e579] [cursor=pointer]: Select Country
+            - generic [ref=e582]:
+              - link "Facebook" [ref=e583] [cursor=pointer]:
+                - /url: https://www.facebook.com/intuit
+                - img "Facebook" [ref=e585]
+              - link "Twitter" [ref=e586] [cursor=pointer]:
+                - /url: https://twitter.com/Intuit
+                - img "Twitter" [ref=e588]
+              - link "YouTube" [ref=e589] [cursor=pointer]:
+                - /url: https://www.youtube.com/user/intuit
+                - img "YouTube" [ref=e591]
+              - link "LinkedIn" [ref=e592] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/intuit
+                - img "LinkedIn" [ref=e594]
+          - generic [ref=e595]:
+            - generic [ref=e596]:
+              - link "intuit" [ref=e598] [cursor=pointer]:
+                - /url: https://www.intuit.com
+                - img "intuit" [ref=e600]
+              - generic [ref=e601]:
+                - link "TurboTax" [ref=e602] [cursor=pointer]:
+                  - /url: https://turbotax.intuit.com/
+                  - img "TurboTax" [ref=e604]
+                - link "Credit Karma" [ref=e605] [cursor=pointer]:
+                  - /url: https://www.creditkarma.com/?source=intuit
+                  - img "Credit Karma" [ref=e607]
+                - link "QuickBooks" [ref=e608] [cursor=pointer]:
+                  - /url: https://quickbooks.intuit.com/
+                  - img "QuickBooks" [ref=e610]
+                - link "Mailchimp" [ref=e611] [cursor=pointer]:
+                  - /url: https://mailchimp.com/?utm_source=intuit.com&utm_medium=referral
+                  - img "Mailchimp" [ref=e613]
+            - generic [ref=e614]:
+              - generic [ref=e615]:
+                - link "About Intuit" [ref=e616] [cursor=pointer]:
+                  - /url: https://www.intuit.com/company/
+                  - generic [ref=e617]: About Intuit
+                - link "Join Our Team" [ref=e618] [cursor=pointer]:
+                  - /url: https://www.intuit.com/careers
+                  - generic [ref=e619]: Join Our Team
+                - link "Press Room" [ref=e620] [cursor=pointer]:
+                  - /url: https://www.intuit.com/company/press-room
+                  - generic [ref=e621]: Press Room
+                - link "Accessibility" [ref=e622] [cursor=pointer]:
+                  - /url: https://www.intuit.com/accessibility/
+                  - generic [ref=e623]: Accessibility
+                - link "Terms and Conditions" [ref=e624] [cursor=pointer]:
+                  - /url: https://accounts.intuit.com/terms-of-service
+                  - generic [ref=e625]: Terms and Conditions
+              - generic [ref=e626]:
+                - generic [ref=e627]:
+                  - generic [ref=e628]:
+                    - paragraph [ref=e629]: © 2026 Intuit Inc. All rights reserved.
+                    - paragraph [ref=e630]: Intuit, QuickBooks, QB, TurboTax, Credit Karma, and Mailchimp are registered trademarks of Intuit Inc. Terms and conditions, features, support, pricing, and service options subject to change without notice.
+                    - paragraph [ref=e631]:
+                      - text: Money movement services are provided by Intuit Payments Inc., licensed as a Money Transmitter by the New York State Department of Financial Services. For details about our money transmission licenses, or for Texas customers with complaints about our service, please
+                      - link "click here." [ref=e632] [cursor=pointer]:
+                        - /url: https://www.intuit.com/legal/licenses/payment-licenses/
+                    - paragraph
+                  - generic [ref=e634]:
+                    - link "About cookies" [ref=e635] [cursor=pointer]:
+                      - /url: https://security.intuit.com/index.php/intuit-cookie-policy/
+                      - generic [ref=e636]: About cookies
+                    - link "Manage cookies |" [ref=e637] [cursor=pointer]:
+                      - /url: "javascript:(function(){   if (typeof OneTrust !== 'undefined' && typeof OneTrust.ToggleInfoDisplay === 'function') {     OneTrust.ToggleInfoDisplay();   } else {     intuit_gdpr.showCookiePreference();   } })();"
+                      - generic [ref=e638]: Manage cookies
+                      - text: "|"
+                - generic [ref=e639]:
+                  - generic [ref=e640]:
+                    - link "Legal" [ref=e641] [cursor=pointer]:
+                      - /url: https://www.intuit.com/legal/
+                      - generic [ref=e642]: Legal
+                    - link "Privacy |" [ref=e643] [cursor=pointer]:
+                      - /url: https://www.intuit.com/privacy/
+                      - generic [ref=e644]: Privacy
+                      - text: "|"
+                    - link "Security |" [ref=e645] [cursor=pointer]:
+                      - /url: https://security.intuit.com
+                      - generic [ref=e646]: Security
+                      - text: "|"
+                    - link "Compliance |" [ref=e647] [cursor=pointer]:
+                      - /url: https://www.intuit.com/compliance/
+                      - generic [ref=e648]: Compliance
+                      - text: "|"
+                  - link "TRUSTe" [ref=e651] [cursor=pointer]:
+                    - /url: //privacy.trustarc.com/privacy-seal/validation?rid=ab182efc-5237-493d-8952-9295f7f3800b
+                    - img "TRUSTe" [ref=e653]
+  - alert [ref=e654]
+  - generic: "Essential, Enhanced Experience & Product Improvement These first-party cookies are set by Intuit or one of our service providers; you cannot turn these off. These cookies enable the site to function as intended, including: basic functionality (for example, your ability to log into your Intuit account or add items to your cart for purchase); remember your preferences (for example, your preferred language or login credentials); provide you personalized content when viewing our site; and, allow us to evaluate your use and navigation of the site to fix bugs and improve the overall experience for you and others. A single cookie may be used for one or all of these purposes. Third-Party Advertisement Yes We leverage advertising trackers across our sites to improve our marketing and advertising activities. These trackers may share some limited personal information with third-party platforms where we may display advertisements or run marketing campaigns. You may choose to turn these trackers off. You will still see Intuit advertisements when you opt-out, but these ads may not be tailored to your interests. This preference applies to your experience on our .intuit sites, once you create or login to your Intuit account, you may be prompted to choose again."
