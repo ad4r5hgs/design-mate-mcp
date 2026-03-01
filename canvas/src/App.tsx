@@ -509,6 +509,7 @@ function createFlatShape(editor: Editor, flat: FlatShape): string {
         borderWidth: flat.props.borderWidth !== undefined ? (flat.props.borderWidth as number) : 1,
         boxShadow: (flat.props.boxShadow as string) || "",
         backgroundImage: (flat.props.backgroundImage as string) || "",
+        animation: (flat.props.animation as string) || "",
         layout: (flat.props.layout as string) || "vertical",
         gap: (flat.props.gap as number) || 0,
         penPadding: (flat.props.penPadding as string) || "0",
@@ -531,6 +532,7 @@ function createFlatShape(editor: Editor, flat: FlatShape): string {
         textAlign: (flat.props.textAlign as string) || "left",
         lineHeight: (flat.props.lineHeight as number) || 1.5,
         textGrowth: (flat.props.textGrowth as string) || "auto",
+        animation: (flat.props.animation as string) || "",
       },
     });
   } else if (flat.shapeType === "pen-icon") {
@@ -545,6 +547,7 @@ function createFlatShape(editor: Editor, flat: FlatShape): string {
         iconName: (flat.props.iconName as string) || "circle",
         color: (flat.props.color as string) || "#000000",
         strokeWidth: (flat.props.strokeWidth as number) || 2,
+        animation: (flat.props.animation as string) || "",
       },
     });
   } else if (flat.shapeType === "pen-image") {
@@ -559,6 +562,7 @@ function createFlatShape(editor: Editor, flat: FlatShape): string {
         src: (flat.props.src as string) || "",
         objectFit: (flat.props.objectFit as string) || "cover",
         cornerRadius: (flat.props.cornerRadius as number) || 0,
+        animation: (flat.props.animation as string) || "",
       },
     });
   }

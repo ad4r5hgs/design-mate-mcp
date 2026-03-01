@@ -8,6 +8,9 @@ import {
     TLResizeInfo,
 } from "tldraw";
 import { normalizeFontWeight } from "../layout-engine";
+import { injectAnimationCSS } from "./animationPresets";
+
+injectAnimationCSS();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Type Declaration
@@ -26,6 +29,7 @@ export interface PenTextProps {
     textAlign: string;     // "left" | "center" | "right"
     lineHeight: number;
     textGrowth: string;    // "auto" | "fixed-width"
+    animation: string;     // CSS animation shorthand
 }
 
 export type PenTextShape = TLBaseShape<typeof PEN_TEXT_TYPE, PenTextProps>;
@@ -48,6 +52,7 @@ export class PenTextUtil extends ShapeUtil<PenTextShape> {
         textAlign: T.string,
         lineHeight: T.number,
         textGrowth: T.string,
+        animation: T.string,
     };
 
     getDefaultProps(): PenTextShape["props"] {
@@ -62,6 +67,7 @@ export class PenTextUtil extends ShapeUtil<PenTextShape> {
             textAlign: "left",
             lineHeight: 1.5,
             textGrowth: "auto",
+            animation: "",
         };
     }
 
@@ -93,7 +99,7 @@ export class PenTextUtil extends ShapeUtil<PenTextShape> {
     };
 
     component(shape: PenTextShape) {
-        const { content, fill, fontSize, fontFamily, fontWeight, textAlign, lineHeight, textGrowth } = shape.props;
+        const { content, fill, fontSize, fontFamily, fontWeight, textAlign, lineHeight, textGrowth, animation } = shape.props;
 
         const isFixedWidth = textGrowth === "fixed-width";
         const resolvedFontWeight = normalizeFontWeight(fontWeight);
@@ -119,6 +125,7 @@ export class PenTextUtil extends ShapeUtil<PenTextShape> {
                         textOverflow: isFixedWidth ? "ellipsis" : undefined,
                         pointerEvents: "none",
                         userSelect: "none",
+                        ...(animation ? { animation } : {}),
                     }}
                 >
                     {content}

@@ -7,6 +7,9 @@ import {
     T,
     TLResizeInfo,
 } from "tldraw";
+import { injectAnimationCSS } from "./animationPresets";
+
+injectAnimationCSS();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -20,6 +23,7 @@ export interface PenImageProps {
     src: string;
     objectFit: string;
     cornerRadius: number;
+    animation: string;     // CSS animation shorthand
 }
 
 export type PenImageShape = TLBaseShape<typeof PEN_IMAGE_TYPE, PenImageProps>;
@@ -37,6 +41,7 @@ export class PenImageUtil extends ShapeUtil<PenImageShape> {
         src: T.string,
         objectFit: T.string,
         cornerRadius: T.number,
+        animation: T.string,
     };
 
     getDefaultProps(): PenImageShape["props"] {
@@ -46,6 +51,7 @@ export class PenImageUtil extends ShapeUtil<PenImageShape> {
             src: "",
             objectFit: "cover",
             cornerRadius: 0,
+            animation: "",
         };
     }
 
@@ -70,7 +76,7 @@ export class PenImageUtil extends ShapeUtil<PenImageShape> {
     };
 
     component(shape: PenImageShape) {
-        const { w, h, src, objectFit, cornerRadius } = shape.props;
+        const { w, h, src, objectFit, cornerRadius, animation } = shape.props;
 
         const wrapperStyle: React.CSSProperties = {
             width: w,
@@ -82,6 +88,7 @@ export class PenImageUtil extends ShapeUtil<PenImageShape> {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#f1f5f9",
+            ...(animation ? { animation } : {}),
         };
 
         if (!src) {

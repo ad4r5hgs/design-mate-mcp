@@ -8,6 +8,9 @@ import {
     TLResizeInfo,
 } from "tldraw";
 import { getIconSvg } from "../icons";
+import { injectAnimationCSS } from "./animationPresets";
+
+injectAnimationCSS();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shape type — Lucide SVG icon
@@ -21,6 +24,7 @@ export interface PenIconProps {
     iconName: string;
     color: string;
     strokeWidth: number;
+    animation: string;     // CSS animation shorthand
 }
 
 export type PenIconShape = TLBaseShape<typeof PEN_ICON_TYPE, PenIconProps>;
@@ -38,6 +42,7 @@ export class PenIconUtil extends ShapeUtil<PenIconShape> {
         iconName: T.string,
         color: T.string,
         strokeWidth: T.number,
+        animation: T.string,
     };
 
     getDefaultProps(): PenIconShape["props"] {
@@ -47,6 +52,7 @@ export class PenIconUtil extends ShapeUtil<PenIconShape> {
             iconName: "circle",
             color: "#000000",
             strokeWidth: 2,
+            animation: "",
         };
     }
 
@@ -71,7 +77,7 @@ export class PenIconUtil extends ShapeUtil<PenIconShape> {
     };
 
     component(shape: PenIconShape) {
-        const { w, h, iconName, color, strokeWidth } = shape.props;
+        const { w, h, iconName, color, strokeWidth, animation } = shape.props;
         const svgInner = getIconSvg(iconName);
 
         if (!svgInner) {
@@ -87,6 +93,7 @@ export class PenIconUtil extends ShapeUtil<PenIconShape> {
                         color: "#ef4444",
                         fontSize: Math.min(w, h) * 0.4,
                         pointerEvents: "none",
+                        ...(animation ? { animation } : {}),
                     }}>
                         ?
                     </div>
@@ -104,6 +111,7 @@ export class PenIconUtil extends ShapeUtil<PenIconShape> {
                         alignItems: "center",
                         justifyContent: "center",
                         pointerEvents: "none",
+                        ...(animation ? { animation } : {}),
                     }}
                     dangerouslySetInnerHTML={{
                         __html: `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round">${svgInner}</svg>`,

@@ -7,6 +7,9 @@ import {
     T,
     TLResizeInfo,
 } from "tldraw";
+import { injectAnimationCSS } from "./animationPresets";
+
+injectAnimationCSS();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Shape type — styled container (children are separate shapes)
@@ -24,6 +27,7 @@ export interface PenFrameProps {
     borderWidth: number;
     boxShadow: string;     // CSS box-shadow value
     backgroundImage: string; // URL for background image
+    animation: string;     // CSS animation shorthand e.g. "pen-float 3s ease-in-out infinite"
     // Layout metadata — stored so resize propagation can reflow without re-running layout engine
     layout: string;        // "vertical" | "horizontal" | "none"
     gap: number;
@@ -49,6 +53,7 @@ export class PenFrameUtil extends ShapeUtil<PenFrameShape> {
         borderWidth: T.number,
         boxShadow: T.string,
         backgroundImage: T.string,
+        animation: T.string,
         layout: T.string,
         gap: T.number,
         penPadding: T.string,
@@ -65,6 +70,7 @@ export class PenFrameUtil extends ShapeUtil<PenFrameShape> {
             borderWidth: 1,
             boxShadow: "",
             backgroundImage: "",
+            animation: "",
             layout: "vertical",
             gap: 0,
             penPadding: "0",
@@ -92,7 +98,7 @@ export class PenFrameUtil extends ShapeUtil<PenFrameShape> {
     };
 
     component(shape: PenFrameShape) {
-        const { w, h, fill, cornerRadius, borderColor, borderWidth, boxShadow, backgroundImage } = shape.props;
+        const { w, h, fill, cornerRadius, borderColor, borderWidth, boxShadow, backgroundImage, animation } = shape.props;
 
         // Detect if fill is a gradient string
         const isGradient = fill && (
@@ -111,6 +117,7 @@ export class PenFrameUtil extends ShapeUtil<PenFrameShape> {
             boxSizing: "border-box",
             pointerEvents: "none",
             overflow: "hidden",
+            ...(animation ? { animation } : {}),
         };
 
         // Apply fill as either gradient or solid color

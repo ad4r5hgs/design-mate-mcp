@@ -93,6 +93,21 @@ const PenNode: z.ZodType<any> = z.lazy(() =>
     objectFit: z.enum(["cover", "contain", "fill"]).optional().describe(
       "CSS object-fit for type='image'. 'cover' (default) = crop to fill bounds, 'contain' = letterbox, 'fill' = stretch"
     ),
+    // Animation (all shape types)
+    animation: z.string().optional().describe(
+      "CSS animation shorthand applied to this shape. Use named presets followed by timing: " +
+      "'pen-pulse 2s ease-in-out infinite' (scale pulse, good for CTAs), " +
+      "'pen-float 3s ease-in-out infinite' (gentle up/down, good for decorative blobs), " +
+      "'pen-spin 2s linear infinite' (rotation, good for icons/spinners), " +
+      "'pen-shimmer 1.5s ease-in-out infinite' (brightness pulse, good for highlights), " +
+      "'pen-bounce 1s ease infinite' (spring bounce, good for attention), " +
+      "'pen-glow 2s ease-in-out infinite' (drop-shadow pulse, good for neon/glow effects), " +
+      "'pen-fade-in 0.8s ease-out forwards' (one-shot fade in), " +
+      "'pen-shake 0.5s ease-in-out' (horizontal shake, good for alerts), " +
+      "'pen-color-cycle 4s linear infinite' (hue-rotate, great for colorful/festive themes), " +
+      "'pen-slide-up 0.6s ease-out forwards' (one-shot slide up reveal). " +
+      "Works on all node types: frame, text, icon, image."
+    ),
   }).passthrough()
 );
 

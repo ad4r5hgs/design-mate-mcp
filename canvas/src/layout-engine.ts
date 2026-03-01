@@ -46,6 +46,8 @@ export interface PenNode {
     // Image fields
     src?: string;
     objectFit?: "cover" | "contain" | "fill";
+    // Animation
+    animation?: string;
 }
 
 export interface FlatShape {
@@ -451,6 +453,7 @@ function place(
                 textAlign: n.textAlign || "left",
                 lineHeight: n.lineHeight || 1.5,
                 textGrowth: (typeof n.width === "number" || n.width === "fill" || (parentContentW && parentContentW > 0 && w >= parentContentW - 2)) ? "fixed-width" : "auto",
+                animation: n.animation || "",
             },
         });
         return;
@@ -466,6 +469,7 @@ function place(
                 iconName: n.iconName || "circle",
                 color: n.iconColor || n.color || n.fill || "#000000",
                 strokeWidth: n.iconStrokeWidth || 2,
+                animation: n.animation || "",
             },
         });
         return;
@@ -481,6 +485,7 @@ function place(
                 src: n.src || "",
                 objectFit: n.objectFit || "cover",
                 cornerRadius: n.cornerRadius || 0,
+                animation: n.animation || "",
             },
         });
         return;
@@ -504,6 +509,7 @@ function place(
             name: n.name || "",
             boxShadow: n.boxShadow || "",
             backgroundImage: n.backgroundImage || "",
+            animation: n.animation || "",
             layout: n.layout || "vertical",             // stored for resize propagation
             gap: n.gap || 0,                            // stored for resize propagation
             penPadding: JSON.stringify(n.padding ?? 0), // stored for resize propagation
