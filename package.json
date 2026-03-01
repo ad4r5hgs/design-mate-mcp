@@ -1,0 +1,48 @@
+{
+  "name": "tldraw-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for AI-driven canvas manipulation with tldraw",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpunj/tldraw-mcp"
+  },
+  "homepage": "https://github.com/dpunj/tldraw-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/dpunj/tldraw-mcp/issues"
+  },
+  "bin": {
+    "tldraw-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsx mcp/index.ts",
+    "build": "tsup mcp/index.ts --format esm --dts --clean",
+    "start": "node dist/index.js",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "tldraw",
+    "diagrams",
+    "ai",
+    "canvas",
+    "whiteboard",
+    "flowchart",
+    "claude",
+    "cursor"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "ws": "^8.18.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "design-assist-mcp": {
+      "type": "local",
+      "command": [
+        "bun",
+        "run",
+        "/Users/adarshgs/Documents/new-github-projects/pencil-dev-tester/mcp/index.ts"
+      ],
+      "enabled": true,
+      "timeout": 30000
+    }
+  }
+}

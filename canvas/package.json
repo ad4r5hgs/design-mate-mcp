@@ -1,0 +1,25 @@
+{
+  "name": "tldraw-canvas",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"tsx src/ws-server.ts\"",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "tldraw": "^3.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.5.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "concurrently": "^8.2.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0"
+  }
+}
