@@ -438,6 +438,32 @@ const TextPanel = track(({ shape, props }: { shape: any; props: Record<string, u
 
     return (
         <div style={panelShell}>
+            {/* ── Content ──────────────────── */}
+            <SectionHeader label="Content" />
+            <div style={{ padding: "0 14px 8px" }}>
+                <textarea
+                    value={(props.content as string) || ""}
+                    onChange={(e) => update("content", e.target.value)}
+                    rows={3}
+                    style={{
+                        width: "100%",
+                        boxSizing: "border-box",
+                        background: C.bgInput,
+                        border: `1px solid ${C.borderInput}`,
+                        borderRadius: 4,
+                        color: C.textPrimary,
+                        fontSize: 12,
+                        padding: "6px 8px",
+                        resize: "vertical",
+                        fontFamily: "inherit",
+                        lineHeight: 1.5,
+                        outline: "none",
+                    }}
+                />
+            </div>
+
+            <Divider />
+
             {/* ── Position ─────────────────── */}
             <SectionHeader label="Position" />
             <div style={{ display: "flex", gap: 6, padding: "0 14px 8px" }}>

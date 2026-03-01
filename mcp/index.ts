@@ -17,8 +17,8 @@ const server = new McpServer({
 
 const PenNode: z.ZodType<any> = z.lazy(() =>
   z.object({
-    type: z.enum(["frame", "text", "ref", "icon"]).describe(
-      "'frame' = div-like container, 'text' = text content, 'ref' = component instance, 'icon' = Lucide SVG icon"
+    type: z.enum(["frame", "text", "ref", "icon", "image"]).describe(
+      "'frame' = div-like container, 'text' = text content, 'ref' = component instance, 'icon' = Lucide SVG icon, 'image' = image from URL or base64 data URI"
     ),
     ref: z.string().optional().describe(
       "Component name for type='ref'. Call list_components to see available components. Example: 'Button/Primary', 'Card', 'Input'"
@@ -86,6 +86,13 @@ const PenNode: z.ZodType<any> = z.lazy(() =>
     ),
     iconColor: z.string().optional().describe("Icon stroke color (default: '#000000')"),
     iconStrokeWidth: z.number().optional().describe("Icon stroke width (default: 2)"),
+    // Image fields (type: "image" only)
+    src: z.string().optional().describe(
+      "Image source for type='image'. Accepts a URL ('https://...') or a base64 data URI ('data:image/png;base64,...'). Default size is 200×150 if width/height are omitted."
+    ),
+    objectFit: z.enum(["cover", "contain", "fill"]).optional().describe(
+      "CSS object-fit for type='image'. 'cover' (default) = crop to fill bounds, 'contain' = letterbox, 'fill' = stretch"
+    ),
   }).passthrough()
 );
 

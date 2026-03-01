@@ -11,6 +11,7 @@ import "tldraw/tldraw.css";
 import { PenFrameUtil, PEN_FRAME_TYPE } from "./shapes/PenFrameUtil";
 import { PenTextUtil, PEN_TEXT_TYPE } from "./shapes/PenTextUtil";
 import { PenIconUtil, PEN_ICON_TYPE } from "./shapes/PenIconUtil";
+import { PenImageUtil, PEN_IMAGE_TYPE } from "./shapes/PenImageUtil";
 import { layoutTree, pad, type PenNode, type FlatShape, type LayoutResult } from "./layout-engine";
 import { resolveRefs } from "./components";
 import { PropertiesPanel } from "./PropertiesPanel";
@@ -23,7 +24,7 @@ import { editorRef, hasSelectionStore, chatOpenStore, chatPanelWidthStore } from
 // Custom shape utils + UI components
 // ─────────────────────────────────────────────────────────────────────────────
 
-const customShapeUtils = [PenFrameUtil, PenTextUtil, PenIconUtil];
+const customShapeUtils = [PenFrameUtil, PenTextUtil, PenIconUtil, PenImageUtil];
 
 // ChatDrawer is rendered outside of tldraw (in App) so it can be resizable
 // and so the canvas container can adjust its right margin to accommodate it.
@@ -269,7 +270,7 @@ function connectWebSocket(editor: Editor) {
         // type is the custom shape type ("pen-text", "pen-frame", "pen-icon").
         if (to.typeName !== "shape") continue;
         const shapeType: string = to.type ?? "";
-        if (!["pen-frame", "pen-text", "pen-icon"].includes(shapeType)) continue;
+        if (!["pen-frame", "pen-text", "pen-icon", "pen-image"].includes(shapeType)) continue;
         if (from.props?.w === to.props?.w && from.props?.h === to.props?.h) continue;
         if (!shapeParentMap.has(to.id as string)) continue;
         propagateResize(editor, to.id as string);
@@ -544,6 +545,20 @@ function createFlatShape(editor: Editor, flat: FlatShape): string {
         iconName: (flat.props.iconName as string) || "circle",
         color: (flat.props.color as string) || "#000000",
         strokeWidth: (flat.props.strokeWidth as number) || 2,
+      },
+    });
+  } else if (flat.shapeType === "pen-image") {
+    editor.createShape({
+      id,
+      type: PEN_IMAGE_TYPE,
+      x: flat.x,
+      y: flat.y,
+      props: {
+        w: flat.w,
+        h: flat.h,
+        src: (flat.props.src as string) || "",
+        objectFit: (flat.props.objectFit as string) || "cover",
+        cornerRadius: (flat.props.cornerRadius as number) || 0,
       },
     });
   }

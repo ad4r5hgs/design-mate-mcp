@@ -9,7 +9,7 @@
  */
 
 export interface PenNode {
-    type: "frame" | "text" | "ref" | "icon";
+    type: "frame" | "text" | "ref" | "icon" | "image";
     width?: number | string;
     height?: number | string;
     fill?: string;
@@ -43,10 +43,13 @@ export interface PenNode {
     iconName?: string;
     iconColor?: string;
     iconStrokeWidth?: number;
+    // Image fields
+    src?: string;
+    objectFit?: "cover" | "contain" | "fill";
 }
 
 export interface FlatShape {
-    shapeType: "pen-frame" | "pen-text" | "pen-icon";
+    shapeType: "pen-frame" | "pen-text" | "pen-icon" | "pen-image";
     x: number;
     y: number;
     w: number;
@@ -275,6 +278,12 @@ function measure(node: PenNode, availW: number, availH: number): MeasuredNode {
         return { node, intrinsicW: size, intrinsicH: size, children: [], isFillW: false, isFillH: false };
     }
 
+    if (node.type === "image") {
+        const w = typeof node.width === "number" ? node.width : (isFillW ? availW : 200);
+        const h = typeof node.height === "number" ? node.height : (isFillH ? availH : 150);
+        return { node, intrinsicW: w, intrinsicH: h, children: [], isFillW, isFillH };
+    }
+
     // Frame
     const p = pad(node.padding);
     const gap = node.gap || 0;
@@ -457,6 +466,21 @@ function place(
                 iconName: n.iconName || "circle",
                 color: n.iconColor || n.color || n.fill || "#000000",
                 strokeWidth: n.iconStrokeWidth || 2,
+            },
+        });
+        return;
+    }
+
+    if (n.type === "image") {
+        shapes.push({
+            shapeType: "pen-image",
+            x, y, w, h,
+            sectionName,
+            parentIndex: parentShapeIndex,
+            props: {
+                src: n.src || "",
+                objectFit: n.objectFit || "cover",
+                cornerRadius: n.cornerRadius || 0,
             },
         });
         return;
