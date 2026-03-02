@@ -423,7 +423,7 @@ register({
     category: "Navigation",
     overrides: {
         label: "Item label (default: 'Dashboard')",
-        icon: "Emoji/icon (default: '📊')",
+        icon: "Lucide icon name (default: 'bar-chart')",
         active: "Whether this item is active (default: false)",
     },
     template: {
@@ -436,7 +436,7 @@ register({
         alignItems: "center",
         borderWidth: 0,
         children: [
-            { type: "text", content: "📊", fontSize: 16 },
+            { type: "icon", iconName: "bar-chart", width: 16, iconColor: "#94a3b8" } as any,
             { type: "text", content: "Dashboard", fontSize: 14, fontWeight: "400", color: "#94a3b8" },
         ],
     },
@@ -448,7 +448,7 @@ register({
     category: "Navigation",
     overrides: {
         label: "Item label (default: 'Dashboard')",
-        icon: "Emoji/icon (default: '📊')",
+        icon: "Lucide icon name (default: 'bar-chart')",
     },
     template: {
         type: "frame",
@@ -460,7 +460,7 @@ register({
         alignItems: "center",
         borderWidth: 0,
         children: [
-            { type: "text", content: "📊", fontSize: 16 },
+            { type: "icon", iconName: "bar-chart", width: 16, iconColor: "#6366f1" } as any,
             { type: "text", content: "Dashboard", fontSize: 14, fontWeight: "500", color: "#6366f1" },
         ],
     },
@@ -627,10 +627,10 @@ export function resolveComponent(name: string, overrides?: Record<string, any>):
     // Alert variants
     if (overrides.variant && name === "Alert") {
         const variants: Record<string, { bg: string; border: string; fg: string; icon: string }> = {
-            info: { bg: "#eff6ff", border: "#bfdbfe", fg: "#1e40af", icon: "ℹ" },
-            success: { bg: "#f0fdf4", border: "#bbf7d0", fg: "#15803d", icon: "✓" },
-            warning: { bg: "#fffbeb", border: "#fde68a", fg: "#b45309", icon: "⚠" },
-            error: { bg: "#fef2f2", border: "#fecaca", fg: "#dc2626", icon: "✕" },
+            info: { bg: "#eff6ff", border: "#bfdbfe", fg: "#1e40af", icon: "i" },
+            success: { bg: "#f0fdf4", border: "#bbf7d0", fg: "#15803d", icon: "ok" },
+            warning: { bg: "#fffbeb", border: "#fde68a", fg: "#b45309", icon: "!" },
+            error: { bg: "#fef2f2", border: "#fecaca", fg: "#dc2626", icon: "x" },
         };
         const v = variants[overrides.variant] || variants.info;
         clone.fill = v.bg;

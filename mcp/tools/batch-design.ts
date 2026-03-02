@@ -15,10 +15,10 @@ import { BatchOperation } from "../schemas/pen-node.js";
 
 const TOOL_DESCRIPTION = `Design UI components on a canvas using a CSS-flexbox-like component tree.
 
-⚠️ MANDATORY WORKFLOW — YOU MUST FOLLOW THESE STEPS:
+MANDATORY WORKFLOW — YOU MUST FOLLOW THESE STEPS:
 1. Call get_design_guide FIRST with the relevant topic to get design methodology
 2. Build ONE section at a time (e.g., Navbar, then Hero, then Features)
-3. ⚠️ AFTER EVERY batch_design call, you MUST call get_screenshot to verify the result
+3. AFTER EVERY batch_design call, you MUST call get_screenshot to verify the result
 4. Carefully inspect the screenshot for overlapping, text overflow, spacing, and alignment issues
 5. Fix ALL visual issues before proceeding to the next section
 6. After all sections are complete, call get_screenshot with mode: "full" for final verification
@@ -78,22 +78,22 @@ Returns created shape IDs, computed bounding boxes, and text overflow warnings.`
 /** Format batch results into a human-readable summary string. */
 function formatBatchSummary(result: any): string {
   const summary = result.results.map((r: any) => {
-    if (r.error) return `❌ ${r.op}: ${r.error}`;
+    if (r.error) return `[FAIL] ${r.op}: ${r.error}`;
     if (r.op === "create") {
-      let line = `✅ create${r.ref ? ` [${r.ref}]` : ""}: ${r.id} (${r.shapeCount || r.ids?.length || 1} shapes)`;
+      let line = `[OK] create${r.ref ? ` [${r.ref}]` : ""}: ${r.id} (${r.shapeCount || r.ids?.length || 1} shapes)`;
       if (r.computedBounds?.length) {
         line += `\n   Top-level bounds: ${JSON.stringify(r.computedBounds.slice(0, 3))}`;
       }
       return line;
     }
-    if (r.op === "update") return `✅ update: ${r.id}`;
-    if (r.op === "delete") return `✅ deleted ${r.deleted} shape(s)`;
-    return `✅ ${r.op}`;
+    if (r.op === "update") return `[OK] update: ${r.id}`;
+    if (r.op === "delete") return `[OK] deleted ${r.deleted} shape(s)`;
+    return `[OK] ${r.op}`;
   }).join("\n");
 
   let warningText = "";
   if (result.warnings?.length) {
-    warningText = "\n\n⚠️ WARNINGS:\n" + result.warnings.map((w: any) =>
+    warningText = "\n\nWARNINGS:\n" + result.warnings.map((w: any) =>
       `  • [${w.section || "?"}] ${w.message}`
     ).join("\n");
     warningText += "\n\nFix these issues before proceeding to the next section.";
@@ -109,7 +109,7 @@ function formatBatchSummary(result: any): string {
   }
 
   const firstRef = result.results[0]?.ref || "section_name";
-  return `Batch complete (${result.results.length} ops):\n${summary}\n\nRefs: ${JSON.stringify(result.refMap)}${warningText}${boundsText}\n\n⚠️ MANDATORY: You MUST now call get_screenshot("${firstRef}") to verify this section. DO NOT proceed to the next section until you have visually confirmed this one looks correct. Check for overlapping elements, text overflow, spacing issues, and alignment problems.`;
+  return `Batch complete (${result.results.length} ops):\n${summary}\n\nRefs: ${JSON.stringify(result.refMap)}${warningText}${boundsText}\n\nMANDATORY: You MUST now call get_screenshot("${firstRef}") to verify this section. DO NOT proceed to the next section until you have visually confirmed this one looks correct. Check for overlapping elements, text overflow, spacing issues, and alignment problems.`;
 }
 
 /** Register the batch_design tool on the MCP server. */

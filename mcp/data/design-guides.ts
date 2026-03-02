@@ -186,7 +186,7 @@ Never converge toward generic AI aesthetics:
 ┌───────────┐  ┌───────────┐  ┌───────────┐
 │  Card 1   │  │  Card 2   │  │  Card 3   │
 │ width:fill│  │ width:fill│  │ width:fill│
-│ shadow ✓  │  │ shadow ✓  │  │ shadow ✓  │
+│ shadow: y │  │ shadow: y │  │ shadow: y │
 └───────────┘  └───────────┘  └───────────┘
 gap: 24, parent: layout: "horizontal"
 \`\`\`
@@ -267,7 +267,7 @@ Parent: layout: "horizontal", gap: 16, children each width: "fill"
 { "type": "frame", "layout": "horizontal", "padding": [10, 16], "gap": 12,
   "cornerRadius": 8, "fill": "rgba(99,102,241,0.1)", "alignItems": "center", "borderWidth": 0,
   "children": [
-    { "type": "text", "content": "📊", "fontSize": 16 },
+    { "type": "icon", "iconName": "bar-chart", "width": 16, "iconColor": "#6366f1" },
     { "type": "text", "content": "Dashboard", "fontSize": 14, "fontWeight": "500", "color": "#6366f1" }
   ] }
 \`\`\`
@@ -329,10 +329,10 @@ Right-align action buttons in cards and modals. One primary per section.
 
 ## Anti-Patterns
 
-- ❌ No multi-purpose cluttered screens — one purpose per screen
-- ❌ Don't give equal emphasis to all actions — hierarchy is mandatory
-- ❌ Don't mix density modes within one screen
-- ❌ No decorative dividers unless functionally needed
-- ❌ No silent states — always show loading, empty, error states
+- [x]No multi-purpose cluttered screens — one purpose per screen
+- [x]Don't give equal emphasis to all actions — hierarchy is mandatory
+- [x]Don't mix density modes within one screen
+- [x]No decorative dividers unless functionally needed
+- [x]No silent states — always show loading, empty, error states
 `,
 };
