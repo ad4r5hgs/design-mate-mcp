@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "tldraw-widget",
+      "name": "tldraw-canvas",
       "dependencies": {
         "react": "^18.3.0",
         "react-dom": "^18.3.0",
