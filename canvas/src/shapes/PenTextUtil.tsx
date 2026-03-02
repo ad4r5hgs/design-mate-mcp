@@ -7,7 +7,7 @@ import {
     T,
     TLResizeInfo,
 } from "tldraw";
-import { normalizeFontWeight } from "../layout-engine";
+import { normalizeFontWeight } from "../lib/layout-engine";
 import { injectAnimationCSS } from "./animationPresets";
 
 injectAnimationCSS();

@@ -1,5 +1,5 @@
 import React, { useSyncExternalStore, useState, useRef, useEffect } from "react";
-import { chatOpenStore, chatPanelWidthStore } from "./stores";
+import { chatOpenStore, chatPanelWidthStore } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ChatDrawer — placeholder for the AI chatbot (built in the next phase).

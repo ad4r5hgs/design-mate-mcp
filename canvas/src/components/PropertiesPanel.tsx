@@ -1,8 +1,8 @@
 import React, { useCallback, useSyncExternalStore } from "react";
 import { track, useEditor, TLShapeId } from "tldraw";
-import { PEN_FRAME_TYPE } from "./shapes/PenFrameUtil";
-import { PEN_TEXT_TYPE } from "./shapes/PenTextUtil";
-import { chatOpenStore } from "./stores";
+import { PEN_FRAME_TYPE } from "../shapes/PenFrameUtil";
+import { PEN_TEXT_TYPE } from "../shapes/PenTextUtil";
+import { chatOpenStore } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Design tokens

@@ -7,7 +7,7 @@ import {
     T,
     TLResizeInfo,
 } from "tldraw";
-import { getIconSvg } from "../icons";
+import { getIconSvg } from "../lib/icons";
 import { injectAnimationCSS } from "./animationPresets";
 
 injectAnimationCSS();

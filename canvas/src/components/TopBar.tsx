@@ -1,5 +1,5 @@
 import React, { useSyncExternalStore, useState, useRef, useEffect } from "react";
-import { filenameStore, chatOpenStore, hasSelectionStore, editorActions } from "./stores";
+import { filenameStore, chatOpenStore, hasSelectionStore, editorActions } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Inline SVG icons (Lucide style — no npm dependency)
