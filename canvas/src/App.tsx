@@ -31,6 +31,10 @@ import {
   type SingleCommand,
 } from "./engine";
 
+/** Set of all registered pen shape types — derived from CUSTOM_SHAPE_UTILS so it
+ *  stays in sync automatically when new shape utils are added to constants.ts. */
+const PEN_SHAPE_TYPES: Set<string> = new Set(CUSTOM_SHAPE_UTILS.map(u => u.type));
+
 // ─── tldraw UI overrides ─────────────────────────────────────────────────────
 
 function InFrontOfTheCanvas() {
@@ -69,7 +73,7 @@ function connectWebSocket(editor: Editor) {
         const [from, to] = change as [any, any];
         if (to.typeName !== "shape") continue;
         const shapeType: string = to.type ?? "";
-        if (!["pen-frame", "pen-text", "pen-icon", "pen-image"].includes(shapeType)) continue;
+        if (!PEN_SHAPE_TYPES.has(shapeType)) continue;
         if (from.props?.w === to.props?.w && from.props?.h === to.props?.h) continue;
         if (!shapeParentMap.has(to.id as string)) continue;
         propagateResize(editor, to.id as string);
