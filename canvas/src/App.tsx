@@ -14,7 +14,7 @@
 import { useCallback, useSyncExternalStore } from "react";
 import { Tldraw, Editor } from "tldraw";
 import "tldraw/tldraw.css";
-import { PenFrameUtil, PenTextUtil, PenIconUtil, PenImageUtil } from "./shapes";
+import { WS_URL, CUSTOM_SHAPE_UTILS } from "./constants";
 import { PropertiesPanel } from "./components/PropertiesPanel";
 import { TopBar } from "./components/TopBar";
 import { ChatDrawer } from "./components/ChatDrawer";
@@ -30,10 +30,6 @@ import {
   type BatchCommand,
   type SingleCommand,
 } from "./engine";
-
-// ─── Custom shape utils ──────────────────────────────────────────────────────
-
-const customShapeUtils = [PenFrameUtil, PenTextUtil, PenIconUtil, PenImageUtil];
 
 // ─── tldraw UI overrides ─────────────────────────────────────────────────────
 
@@ -88,7 +84,7 @@ function connectWebSocket(editor: Editor) {
     activeWs = null;
   }
 
-  const ws = new WebSocket("ws://localhost:4000");
+  const ws = new WebSocket(WS_URL);
   activeWs = ws;
 
   ws.onopen = () => console.log("[ws] connected");
@@ -137,7 +133,7 @@ export function App() {
       hasSelectionStore.set(editor.getSelectedShapeIds().length > 0);
     });
     connectWebSocket(editor);
-    console.log("[app] mounted with:", customShapeUtils.map(u => u.type));
+    console.log("[app] mounted with:", CUSTOM_SHAPE_UTILS.map(u => u.type));
   }, []);
 
   return (
@@ -151,7 +147,7 @@ export function App() {
         bottom: 0,
         transition: "right 0.0s",
       }}>
-        <Tldraw onMount={handleMount} shapeUtils={customShapeUtils} components={customComponents} />
+        <Tldraw onMount={handleMount} shapeUtils={CUSTOM_SHAPE_UTILS} components={customComponents} />
       </div>
       <ChatDrawer />
     </div>

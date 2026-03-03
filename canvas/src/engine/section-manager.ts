@@ -11,11 +11,7 @@
  */
 
 import type { Editor, TLShapeId } from "tldraw";
-
-// ─── Storage Keys ────────────────────────────────────────────────────────────
-
-const SECTION_MAP_KEY = "tldraw-mcp-section-map";
-const SECTION_SHAPES_KEY = "tldraw-mcp-section-shapes";
+import { SECTION_MAP_KEY, SECTION_SHAPES_KEY } from "../constants";
 
 // ─── Maps ────────────────────────────────────────────────────────────────────
 

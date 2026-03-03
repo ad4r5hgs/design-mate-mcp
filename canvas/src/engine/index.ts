@@ -26,11 +26,14 @@ export { createFlatShape } from "./shape-factory";
 
 export {
   handleBatch,
-  handleSingle,
   type BatchCommand,
-  type SingleCommand,
   type BatchOperation,
-} from "./batch-processor";
+} from "./batch-handler";
+
+export {
+  handleSingle,
+  type SingleCommand,
+} from "./single-handler";
 
 export { handleScreenshot } from "./screenshot-handler";
 
