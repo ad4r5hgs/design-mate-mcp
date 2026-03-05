@@ -1,8 +1,8 @@
-# CLAUDE.md — Repository Index
+# Agents.md — Repository Index
 
-**designmate** — An MCP server that lets AI agents drive a tldraw canvas with a CSS flexbox layout
-engine. AI describes UI trees in JSON; the engine computes pixel-perfect layouts and renders them as
-interactive shapes.
+You are an AI agent working on **designmate** — an MCP server that lets AI agents drive a tldraw
+canvas with a CSS flexbox layout engine. AI describes UI trees in JSON; the engine computes
+pixel-perfect layouts and renders them as interactive shapes.
 
 ---
 
@@ -10,11 +10,12 @@ interactive shapes.
 
 | Directory | What it is | Full instructions |
 |-----------|-----------|-------------------|
-| `mcp/` | MCP server — receives AI tool calls, validates them, and bridges to the canvas over WebSocket | [`mcp/CLAUDE.md`](mcp/CLAUDE.md) |
-| `canvas/` | Vite + React app — tldraw canvas, layout engine, WebSocket relay server | [`canvas/CLAUDE.md`](canvas/CLAUDE.md) |
+| `mcp/` | MCP server — receives AI tool calls, validates them, and bridges to the canvas over WebSocket | [`mcp/Agents.md`](mcp/Agents.md) |
+| `canvas/` | Vite + React app — tldraw canvas, layout engine, WebSocket relay server | [`canvas/Agents.md`](canvas/Agents.md) |
 
-**Always read the relevant sub-directory instruction file before working in that package.**
-It is the authoritative guide for module structure, extension patterns, and local conventions.
+**Before working in any package, read its instruction file first.**
+It defines the module structure, extension patterns, and conventions you must follow.
+Do not make assumptions about a package you have not read the instructions for.
 
 ---
 
@@ -70,8 +71,9 @@ cd mcp && bun run check       # TypeScript check (no emit)
 
 ## Non-Negotiable Coding Rules
 
-These rules apply to **every file** in this repository.
-Sub-directory instruction files inherit these rules — they are not optional.
+You must follow these rules on every file you create or modify in this repository.
+They are inherited by all sub-directory instruction files and are not open to interpretation.
+If a task seems to require violating a rule, ask for clarification before proceeding.
 
 ### 1. No Magic Numbers or Strings
 
