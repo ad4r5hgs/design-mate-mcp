@@ -144,7 +144,7 @@ function measureFrameNode(
 
     const frameW = typeof node.width === "number" ? node.width
         : (isFillW ? availW : contentW + p.l + p.r);
-    const frameH = typeof node.height === "number"
+    const frameH = (typeof node.height === "number" && node.height > 0)
         ? Math.max(node.height, contentH + p.t + p.b)
         : (isFillH ? availH : contentH + p.t + p.b);
 
@@ -155,8 +155,8 @@ function measureFrameNode(
 // Add a new node type here — no other file needs to change.
 
 const measurers: Record<string, NodeMeasurerFn> = {
-    text:  measureTextNode,
-    icon:  measureIconNode,
+    text: measureTextNode,
+    icon: measureIconNode,
     image: measureImageNode,
     frame: measureFrameNode,
 };

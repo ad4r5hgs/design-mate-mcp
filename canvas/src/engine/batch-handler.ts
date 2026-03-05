@@ -131,7 +131,7 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               borderWidth: p.borderWidth as number,
               name: p.name as string,
               width: op.width || (p.width as number) || DEFAULT_FRAME_WIDTH,
-              height: op.height || (p.height as number) || DEFAULT_FRAME_HEIGHT,
+              height: op.height || (p.height as number) || undefined,
               overflow: "hidden",
               children: p.children as PenNode[],
               boxShadow: p.boxShadow as string,
@@ -145,7 +145,7 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               op.x || 0,
               resolvedY,
               (op.width || (p.width as number) || DEFAULT_FRAME_WIDTH),
-              (op.height || (p.height as number) || DEFAULT_FRAME_HEIGHT),
+              (op.height || (p.height as number) || 0),
             );
 
             const createdIds: string[] = [];

@@ -71,6 +71,12 @@ Call \`list_components\` first to see all available components and their overrid
 { "type": "ref", "ref": "Avatar", "overrides": { "initials": "JD", "size": 48 } }
 \`\`\`
 
+## Defaults & Auto-sizing
+- **Width**: defaults to 400px if omitted
+- **Height**: auto-sizes to content when omitted (recommended for navbars, cards, sections). Set explicitly only for fixed-height containers.
+- **Font size**: 16px if omitted
+- **Font family**: Inter, sans-serif
+
 ## Response
 Returns created shape IDs, computed bounding boxes, and text overflow warnings.`;
 

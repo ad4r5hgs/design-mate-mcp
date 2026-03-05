@@ -123,8 +123,8 @@ export const CreateOp = z.object({
 - y: "after:Navbar" → placed at bottom edge of the "Navbar" section
 - y: "after:Hero Section" → placed at bottom edge of the "Hero Section"`
   ),
-  width: z.number().optional().describe("Container width (px). Common: 400 (card), 800 (content), 1200 (full-width)"),
-  height: z.number().optional().describe("Container height (px). Estimate generously — extra space > overflow."),
+  width: z.number().optional().describe("Container width (px). Default: 400. Common: 400 (card), 800 (content), 1200 (full-width)"),
+  height: z.number().optional().describe("Container height (px). Omit for auto-sizing to content (recommended for navbars, cards, sections). Set explicitly only for fixed-height containers."),
   ref: z.string().optional().describe("Reference name for later update/delete operations"),
   props: z.record(z.any()).optional().describe("Shape properties. For pen-frame: include 'children' array with the component tree."),
 });
