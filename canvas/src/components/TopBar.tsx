@@ -1,5 +1,5 @@
-import React, { useSyncExternalStore, useState, useRef, useEffect } from "react";
-import { filenameStore, chatOpenStore, hasSelectionStore, editorActions } from "../stores";
+import React, { useState, useRef, useEffect } from "react";
+import { useCanvasStore, editorActions } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Inline SVG icons (Lucide style — no npm dependency)
@@ -36,7 +36,7 @@ function IconMoon({ size = 15, color = "currentColor" }: { size?: number; color?
 function IconSparkles({ size = 15, color = "currentColor" }: { size?: number; color?: string }) {
     return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
             <path d="M20 3v4" />
             <path d="M22 5h-4" />
             <path d="M4 17v2" />
@@ -89,8 +89,10 @@ function IconCopy({ size = 15, color = "currentColor" }: { size?: number; color?
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function TopBar() {
-    const filename = useSyncExternalStore(filenameStore.subscribe, filenameStore.get);
-    const hasSelection = useSyncExternalStore(hasSelectionStore.subscribe, hasSelectionStore.get);
+    const filename = useCanvasStore((s) => s.filename);
+    const hasSelection = useCanvasStore((s) => s.hasSelection);
+    const setFilename = useCanvasStore((s) => s.setFilename);
+
     const [editing, setEditing] = useState(false);
     const [editValue, setEditValue] = useState(filename);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -100,14 +102,12 @@ export function TopBar() {
     }, [editing]);
 
     const startEdit = () => {
-        setEditValue(filenameStore.get());
+        setEditValue(useCanvasStore.getState().filename);
         setEditing(true);
     };
 
     const commitEdit = () => {
-        const trimmed = editValue.trim() || "Untitled";
-        filenameStore.set(trimmed);
-        try { localStorage.setItem("canvas-filename", trimmed); } catch { /* storage unavailable */ }
+        setFilename(editValue); // persist middleware handles localStorage automatically
         setEditing(false);
     };
 
@@ -301,12 +301,13 @@ function ActionIconButton({
 
 function AIButton() {
     const [hovered, setHovered] = useState(false);
-    const isOpen = useSyncExternalStore(chatOpenStore.subscribe, chatOpenStore.get);
+    const isOpen = useCanvasStore((s) => s.chatOpen);
+    const toggleChat = useCanvasStore((s) => s.toggleChat);
 
     return (
         <button
             title="Open AI Assistant"
-            onClick={() => chatOpenStore.set(!isOpen)}
+            onClick={toggleChat}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             style={{

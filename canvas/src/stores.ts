@@ -1,57 +1,90 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// Tiny pub/sub stores — shared state without React context.
-//
-// tldraw renders component slots as independent React subtrees that don't
-// share a common context, so we use module-level observables instead.
-// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * Canvas Store — Global reactive state via Zustand.
+ *
+ * A single typed store replaces the previous custom pub/sub implementation.
+ * Middleware stack:
+ *   - devtools:              action names visible in Redux DevTools browser extension
+ *   - persist:               `filename` and `chatPanelWidth` auto-saved to localStorage
+ *   - subscribeWithSelector: granular slice subscriptions outside React components
+ *
+ * INTENTIONALLY outside this store:
+ *   - `editorRef`:    mutable imperative ref — not reactive state
+ *   - `editorActions`: imperative action namespace that calls editor methods directly
+ *
+ * @module stores
+ */
 
-type Listener = () => void;
+import { create } from "zustand";
+import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 
-export interface Store<T> {
-    get: () => T;
-    set: (value: T) => void;
-    subscribe: (listener: Listener) => () => void;
+// ─── Store shape ─────────────────────────────────────────────────────────────
+
+interface CanvasStore {
+    // ── State ──────────────────────────────────────────────────────────────────
+    /** Current canvas file name shown in the TopBar */
+    filename: string;
+    /** Whether the AI chat drawer is open */
+    chatOpen: boolean;
+    /** Width of the chat drawer in pixels */
+    chatPanelWidth: number;
+    /** True whenever ≥1 shape is selected — drives enable/disable of action buttons */
+    hasSelection: boolean;
+
+    // ── Actions ────────────────────────────────────────────────────────────────
+    setFilename: (name: string) => void;
+    toggleChat: () => void;
+    setChatOpen: (open: boolean) => void;
+    setChatPanelWidth: (width: number) => void;
+    setHasSelection: (has: boolean) => void;
 }
 
-function createStore<T>(initial: T): Store<T> {
-    let value = initial;
-    const listeners = new Set<Listener>();
-    return {
-        get: () => value,
-        set: (v) => {
-            value = v;
-            listeners.forEach((fn) => fn());
-        },
-        subscribe: (fn) => {
-            listeners.add(fn);
-            return () => listeners.delete(fn);
-        },
-    };
-}
+// ─── Store ───────────────────────────────────────────────────────────────────
 
-function readLocalStorage(key: string, fallback: string): string {
-    try { return localStorage.getItem(key) || fallback; } catch { return fallback; }
-}
+export const useCanvasStore = create<CanvasStore>()(
+    devtools(
+        persist(
+            subscribeWithSelector((set) => ({
+                // Initial state
+                filename: "Untitled",
+                chatOpen: false,
+                chatPanelWidth: 280,
+                hasSelection: false,
 
-export const filenameStore = createStore<string>(
-    readLocalStorage("canvas-filename", "Untitled")
+                // Actions
+                setFilename: (name) =>
+                    set({ filename: name.trim() || "Untitled" }, false, "setFilename"),
+
+                toggleChat: () =>
+                    set((s) => ({ chatOpen: !s.chatOpen }), false, "toggleChat"),
+
+                setChatOpen: (open) =>
+                    set({ chatOpen: open }, false, "setChatOpen"),
+
+                setChatPanelWidth: (width) =>
+                    set({ chatPanelWidth: width }, false, "setChatPanelWidth"),
+
+                setHasSelection: (has) =>
+                    set({ hasSelection: has }, false, "setHasSelection"),
+            })),
+            {
+                name: "canvas-store",
+                // Only persist UI preferences — hasSelection is transient
+                partialize: (s) => ({
+                    filename: s.filename,
+                    chatPanelWidth: s.chatPanelWidth,
+                }),
+            }
+        ),
+        { name: "CanvasStore" }
+    )
 );
 
-export const chatOpenStore = createStore<boolean>(false);
-
-/** Width of the chat drawer in pixels — updated by the resize drag handle */
-export const chatPanelWidthStore = createStore<number>(280);
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Editor ref + selection state — lets TopBar (outside tldraw's React tree)
-// call editor methods and react to selection changes.
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── Editor ref + actions ─────────────────────────────────────────────────────
+// Kept outside Zustand — the tldraw Editor is an imperative object, not
+// reactive state. Putting it in a store would cause needless re-renders.
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const editorRef: { current: any | null } = { current: null };
-
-/** True whenever ≥1 shape is selected — drives enable/disable of action buttons */
-export const hasSelectionStore = createStore<boolean>(false);
 
 export const editorActions = {
     undo: () => editorRef.current?.undo(),

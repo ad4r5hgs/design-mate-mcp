@@ -1,22 +1,22 @@
-import React, { useCallback, useSyncExternalStore } from "react";
+import React, { useCallback } from "react";
 import { track, useEditor, TLShapeId } from "tldraw";
 import { PEN_FRAME_TYPE } from "../shapes/PenFrameUtil";
 import { PEN_TEXT_TYPE } from "../shapes/PenTextUtil";
-import { chatOpenStore } from "../stores";
+import { useCanvasStore } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Design tokens
 // ─────────────────────────────────────────────────────────────────────────────
 
 const C = {
-    bgPanel:   "#161616",
-    bgInput:   "#1e1e1e",
-    border:    "#222222",
+    bgPanel: "#161616",
+    bgInput: "#1e1e1e",
+    border: "#222222",
     borderInput: "#2a2a2a",
     textPrimary: "#e8e8e8",
-    textMuted:   "#666666",
-    textDim:     "#3a3a3a",
-    accent:      "#4A9EF5",
+    textMuted: "#666666",
+    textDim: "#3a3a3a",
+    accent: "#4A9EF5",
     font: "Inter, system-ui, sans-serif",
 } as const;
 
@@ -263,7 +263,7 @@ const panelShell: React.CSSProperties = {
 
 export const PropertiesPanel = track(() => {
     const editor = useEditor();
-    const chatOpen = useSyncExternalStore(chatOpenStore.subscribe, chatOpenStore.get);
+    const chatOpen = useCanvasStore((s) => s.chatOpen);
     const selectedShapes = editor.getSelectedShapes();
 
     // Hide panel when chat drawer is open

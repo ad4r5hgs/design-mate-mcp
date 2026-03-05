@@ -11,7 +11,7 @@
  * @module App
  */
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback } from "react";
 import { Tldraw, Editor } from "tldraw";
 import "tldraw/tldraw.css";
 import { WS_URL, CUSTOM_SHAPE_UTILS } from "./constants";
@@ -19,7 +19,7 @@ import { PropertiesPanel } from "./components/PropertiesPanel";
 import { TopBar } from "./components/TopBar";
 import { ChatDrawer } from "./components/ChatDrawer";
 import { CustomToolbar } from "./components/CustomToolbar";
-import { editorRef, hasSelectionStore, chatOpenStore, chatPanelWidthStore } from "./stores";
+import { useCanvasStore, editorRef } from "./stores";
 import {
   restoreSectionMap,
   shapeParentMap,
@@ -127,18 +127,19 @@ function connectWebSocket(editor: Editor) {
 // ─── Root Component ──────────────────────────────────────────────────────────
 
 export function App() {
-  const chatOpen = useSyncExternalStore(chatOpenStore.subscribe, chatOpenStore.get);
-  const chatWidth = useSyncExternalStore(chatPanelWidthStore.subscribe, chatPanelWidthStore.get);
+  const chatOpen = useCanvasStore((s) => s.chatOpen);
+  const chatPanelWidth = useCanvasStore((s) => s.chatPanelWidth);
+  const setHasSelection = useCanvasStore((s) => s.setHasSelection);
 
   const handleMount = useCallback((editor: Editor) => {
     editor.user.updateUserPreferences({ colorScheme: "dark" });
     editorRef.current = editor;
     editor.store.listen(() => {
-      hasSelectionStore.set(editor.getSelectedShapeIds().length > 0);
+      setHasSelection(editor.getSelectedShapeIds().length > 0);
     });
     connectWebSocket(editor);
     console.log("[app] mounted with:", CUSTOM_SHAPE_UTILS.map(u => u.type));
-  }, []);
+  }, [setHasSelection]);
 
   return (
     <div style={{ position: "fixed", inset: 0, background: "#111111" }}>
@@ -147,7 +148,7 @@ export function App() {
         position: "absolute",
         top: 44,
         left: 0,
-        right: chatOpen ? chatWidth : 0,
+        right: chatOpen ? chatPanelWidth : 0,
         bottom: 0,
         transition: "right 0.0s",
       }}>

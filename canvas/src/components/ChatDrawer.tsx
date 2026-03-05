@@ -1,5 +1,5 @@
-import React, { useSyncExternalStore, useState, useRef, useEffect } from "react";
-import { chatOpenStore, chatPanelWidthStore } from "../stores";
+import React, { useState, useRef, useEffect } from "react";
+import { useCanvasStore } from "../stores";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ChatDrawer — placeholder for the AI chatbot (built in the next phase).
@@ -11,8 +11,10 @@ const MIN_WIDTH = 200;
 const MAX_WIDTH = 640;
 
 export function ChatDrawer() {
-    const isOpen = useSyncExternalStore(chatOpenStore.subscribe, chatOpenStore.get);
-    const width = useSyncExternalStore(chatPanelWidthStore.subscribe, chatPanelWidthStore.get);
+    const isOpen = useCanvasStore((s) => s.chatOpen);
+    const width = useCanvasStore((s) => s.chatPanelWidth);
+    const setChatOpen = useCanvasStore((s) => s.setChatOpen);
+    const setChatPanelWidth = useCanvasStore((s) => s.setChatPanelWidth);
 
     const [dragging, setDragging] = useState(false);
     const [handleHovered, setHandleHovered] = useState(false);
@@ -29,7 +31,7 @@ export function ChatDrawer() {
             // Moving mouse left increases panel width (panel is anchored right)
             const delta = dragRef.current.startX - e.clientX;
             const newWidth = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, dragRef.current.startW + delta));
-            chatPanelWidthStore.set(newWidth);
+            setChatPanelWidth(newWidth);
         };
 
         const onMouseUp = () => {
@@ -43,7 +45,7 @@ export function ChatDrawer() {
             window.removeEventListener("mousemove", onMouseMove);
             window.removeEventListener("mouseup", onMouseUp);
         };
-    }, [dragging]);
+    }, [dragging, setChatPanelWidth]);
 
     if (!isOpen) return null;
 
@@ -78,8 +80,8 @@ export function ChatDrawer() {
                     backgroundColor: dragging
                         ? "#4A9EF5"
                         : handleHovered
-                        ? "#333333"
-                        : "transparent",
+                            ? "#333333"
+                            : "transparent",
                     transition: dragging ? "none" : "background-color 0.15s",
                     zIndex: 1,
                 }}
@@ -87,7 +89,7 @@ export function ChatDrawer() {
                 onMouseLeave={() => setHandleHovered(false)}
                 onMouseDown={(e) => {
                     e.preventDefault();
-                    dragRef.current = { startX: e.clientX, startW: chatPanelWidthStore.get() };
+                    dragRef.current = { startX: e.clientX, startW: useCanvasStore.getState().chatPanelWidth };
                     setDragging(true);
                 }}
             />
@@ -115,7 +117,7 @@ export function ChatDrawer() {
                 </div>
 
                 <button
-                    onClick={() => chatOpenStore.set(false)}
+                    onClick={() => setChatOpen(false)}
                     onMouseEnter={() => setCloseHovered(true)}
                     onMouseLeave={() => setCloseHovered(false)}
                     style={{
