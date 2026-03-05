@@ -8,10 +8,9 @@
  * @module tools/batch-design
  */
 
-import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CanvasBridge } from "../bridge.js";
-import { BatchOperation } from "../schemas/pen-node.js";
+import { BatchDesignInput } from "../schemas/tool-schemas.js";
 
 const TOOL_DESCRIPTION = `Design UI components on a canvas using a CSS-flexbox-like component tree.
 
@@ -114,12 +113,11 @@ function formatBatchSummary(result: any): string {
 
 /** Register the batch_design tool on the MCP server. */
 export function registerBatchDesign(server: McpServer, bridge: CanvasBridge): void {
-  server.tool(
+  server.registerTool(
     "batch_design",
-    TOOL_DESCRIPTION,
     {
-      operations: z.array(BatchOperation).describe("Array of create/update/delete operations."),
-      clearFirst: z.boolean().optional().default(false).describe("Clear canvas before executing. Use when starting fresh."),
+      description: TOOL_DESCRIPTION,
+      inputSchema: BatchDesignInput,
     },
     async (args) => {
       try {

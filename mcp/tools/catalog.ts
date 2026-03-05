@@ -7,22 +7,28 @@
  * @module tools/catalog
  */
 
-import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { DESIGN_GUIDES } from "../data/design-guides.js";
+import { DESIGN_GUIDES } from "../data/design-guides-loader.js";
 import { COMPONENT_CATALOG } from "../data/component-catalog.js";
 import { ICON_CATALOG } from "../data/icon-catalog.js";
+import {
+  DesignGuideInput,
+  ListComponentsInput,
+  ListIconsInput,
+  GUIDE_TOPIC_LIST,
+} from "../schemas/tool-schemas.js";
 
 /** Register the catalog tools (list_components, list_icons, get_design_guide) on the MCP server. */
 export function registerCatalog(server: McpServer): void {
 
   // ── get_design_guide ────────────────────────────────────────────────────────
 
-  server.tool(
+  server.registerTool(
     "get_design_guide",
-    `Get comprehensive design methodology and patterns for a specific type of design.
+    {
+      description: `Get comprehensive design methodology and patterns for a specific type of design.
 
-ALWAYS call this before starting a new design. The guide includes:
+Call this for design guidance on a specific topic. The guide includes:
 - Pre-design methodology and workflow
 - Page structure and section ordering
 - Visual guidelines (typography, color, effects)
@@ -32,15 +38,13 @@ ALWAYS call this before starting a new design. The guide includes:
 - Anti-slop rules to avoid generic AI aesthetics
 
 Available topics:
-- "landing-page": Marketing/landing pages, promotional sites
-- "web-app": Dashboards, admin panels, SaaS product UI`,
-    {
-      topic: z.enum(["landing-page", "web-app"]).describe("Type of design to get guidance for"),
+${GUIDE_TOPIC_LIST}`,
+      inputSchema: DesignGuideInput,
     },
     async (args) => {
       const guide = DESIGN_GUIDES[args.topic];
       if (!guide) {
-        return { content: [{ type: "text" as const, text: `Unknown topic: ${args.topic}. Available: landing-page, web-app` }], isError: true };
+        return { content: [{ type: "text" as const, text: `Unknown topic: ${args.topic}. Available: ${Object.keys(DESIGN_GUIDES).join(", ")}` }], isError: true };
       }
       return { content: [{ type: "text" as const, text: guide }] };
     }
@@ -48,9 +52,10 @@ Available topics:
 
   // ── list_components ─────────────────────────────────────────────────────────
 
-  server.tool(
+  server.registerTool(
     "list_components",
-    `List all available reusable UI components.
+    {
+      description: `List all available reusable UI components.
 
 Call this to see what components are available, then use them in batch_design with:
 \`\`\`json
@@ -58,7 +63,8 @@ Call this to see what components are available, then use them in batch_design wi
 \`\`\`
 
 Components are pre-styled with shadows, borders, and correct spacing.`,
-    {},
+      inputSchema: ListComponentsInput,
+    },
     async () => {
       const grouped: Record<string, typeof COMPONENT_CATALOG> = {};
       for (const c of COMPONENT_CATALOG) {
@@ -91,9 +97,10 @@ Components are pre-styled with shadows, borders, and correct spacing.`,
 
   // ── list_icons ──────────────────────────────────────────────────────────────
 
-  server.tool(
+  server.registerTool(
     "list_icons",
-    `List all available Lucide SVG icons, grouped by category.
+    {
+      description: `List all available Lucide SVG icons, grouped by category.
 
 Use icons inside batch_design children arrays:
 \`\`\`json
@@ -101,7 +108,8 @@ Use icons inside batch_design children arrays:
 \`\`\`
 
 Icons render as crisp SVG at any size. Default: 24×24, stroke-width: 2.`,
-    {},
+      inputSchema: ListIconsInput,
+    },
     async () => {
       let text = "# Available Icons (Lucide)\n\n";
       let total = 0;

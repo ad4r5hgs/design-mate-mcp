@@ -8,15 +8,16 @@
  * @module tools/screenshot
  */
 
-import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CanvasBridge } from "../bridge.js";
+import { ScreenshotInput } from "../schemas/tool-schemas.js";
 
 /** Register the get_screenshot tool on the MCP server. */
 export function registerScreenshot(server: McpServer, bridge: CanvasBridge): void {
-  server.tool(
+  server.registerTool(
     "get_screenshot",
-    `Capture a PNG screenshot in one of two modes:
+    {
+      description: `Capture a PNG screenshot in one of two modes:
 
 ## Mode 1: Section Screenshot (RECOMMENDED after each batch_design)
 Pass a \`sectionName\` to capture that section PLUS ~25% surrounding context.
@@ -42,10 +43,7 @@ After receiving the screenshot, CAREFULLY check for:
 NOTE: Section screenshots include ~25% extra context around the section bounds. This is intentional — it lets you see how the section relates to its neighbors.
 
 If you see ANY visual issues, fix them with batch_design BEFORE proceeding to the next section.`,
-    {
-      sectionName: z.string().optional().describe("Name of a section to screenshot with 125% context (e.g., 'Navbar', 'Hero Section')"),
-      shapeIds: z.array(z.string()).optional().describe("Specific shape IDs to capture with context"),
-      mode: z.enum(["section", "full"]).optional().describe("'section' = scoped + 25% context (default when sectionName given), 'full' = entire canvas"),
+      inputSchema: ScreenshotInput,
     },
     async (args) => {
       try {

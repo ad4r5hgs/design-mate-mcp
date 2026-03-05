@@ -7,15 +7,16 @@
  * @module tools/batch-get
  */
 
-import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CanvasBridge } from "../bridge.js";
+import { BatchGetInput } from "../schemas/tool-schemas.js";
 
 /** Register the batch_get tool on the MCP server. */
 export function registerBatchGet(server: McpServer, bridge: CanvasBridge): void {
-  server.tool(
+  server.registerTool(
     "batch_get",
-    `Read shapes from the canvas with optional filtering.
+    {
+      description: `Read shapes from the canvas with optional filtering.
 
 Use this to:
 - Inspect what's on the canvas (IDs, positions, properties)
@@ -23,10 +24,7 @@ Use this to:
 - Find shapes by name to get their bounding box for y-anchoring
 
 Each shape includes: id, type, x, y, w, h, and all props.`,
-    {
-      ids: z.array(z.string()).optional().describe("Filter by specific shape IDs"),
-      types: z.array(z.string()).optional().describe("Filter by type: 'pen-frame', 'pen-text'"),
-      name: z.string().optional().describe("Filter by section name"),
+      inputSchema: BatchGetInput,
     },
     async (args) => {
       try {
