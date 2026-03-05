@@ -27,6 +27,9 @@ import {
   handleSingle,
   handleScreenshot,
   propagateResize,
+  tryParseJSON,
+  isValidCommand,
+  isValidBatchCommand,
   type BatchCommand,
   type SingleCommand,
 } from "./engine";
@@ -60,7 +63,6 @@ const customComponents = {
 
 // ─── WebSocket connection ────────────────────────────────────────────────────
 
-type CanvasCommand = SingleCommand | BatchCommand;
 let activeWs: WebSocket | null = null;
 
 function connectWebSocket(editor: Editor) {
@@ -98,25 +100,37 @@ function connectWebSocket(editor: Editor) {
   };
 
   ws.onmessage = async (event) => {
-    try {
-      const msg = JSON.parse(event.data) as CanvasCommand;
-      if (!msg.type || !msg.requestId) return;
+    // ── Deserialization boundary — parse, don't validate ──────────────
+    const parsed = tryParseJSON(typeof event.data === "string" ? event.data : String(event.data));
+    if (!isValidCommand(parsed)) {
+      console.warn("[ws] dropped invalid message (malformed JSON or missing type/requestId)");
+      return;
+    }
 
+    try {
       // Screenshot is async — handle separately
-      if (msg.type === "screenshot") {
+      if (parsed.type === "screenshot") {
         try {
-          const result = await handleScreenshot(editor, msg as any);
+          const result = await handleScreenshot(editor, parsed as any);
           ws.send(JSON.stringify(result));
         } catch (err) {
-          ws.send(JSON.stringify({ requestId: msg.requestId, error: `Screenshot failed: ${err}` }));
+          ws.send(JSON.stringify({ requestId: parsed.requestId, error: `Screenshot failed: ${err}` }));
         }
         return;
       }
 
-      const response = msg.type === "batch"
-        ? handleBatch(editor, msg as BatchCommand)
-        : handleSingle(editor, msg as SingleCommand);
+      if (parsed.type === "batch") {
+        if (!isValidBatchCommand(parsed)) {
+          ws.send(JSON.stringify({ requestId: parsed.requestId, error: "Invalid batch command: 'operations' must be an array" }));
+          return;
+        }
+        const response = handleBatch(editor, parsed as BatchCommand);
+        ws.send(JSON.stringify(response));
+        return;
+      }
 
+      // Single command
+      const response = handleSingle(editor, parsed as SingleCommand);
       ws.send(JSON.stringify(response));
     } catch (err) {
       console.error("[ws] error:", err);

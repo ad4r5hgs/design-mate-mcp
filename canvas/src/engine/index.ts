@@ -38,3 +38,12 @@ export {
 export { handleScreenshot } from "./screenshot-handler";
 
 export { propagateResize } from "./resize-handler";
+
+export {
+  tryParseJSON,
+  isValidCommand,
+  isValidBatchCommand,
+  isRelayable,
+  type ValidCommand,
+  type ValidBatchCommand,
+} from "./message-validator";

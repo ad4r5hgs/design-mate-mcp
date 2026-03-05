@@ -131,6 +131,18 @@ export class CanvasBridge {
       this.ws.on("message", (data) => {
         try {
           const msg = JSON.parse(data.toString());
+
+          // ── Response validation — verify structure before handler lookup ──
+          if (typeof msg !== "object" || msg === null) {
+            console.warn("[bridge] dropped non-object response from canvas");
+            return;
+          }
+
+          if (typeof msg.requestId !== "string") {
+            console.warn("[bridge] dropped response without valid requestId:", JSON.stringify(msg).slice(0, 100));
+            return;
+          }
+
           const handler = this.handlers.get(msg.requestId);
           if (handler) {
             if (msg.error) {
@@ -139,9 +151,12 @@ export class CanvasBridge {
               handler(msg);
             }
             this.handlers.delete(msg.requestId);
+          } else {
+            // Unmatched requestId — could be a stale handler or spoofed message
+            console.warn(`[bridge] no handler for requestId: ${msg.requestId} (stale or unexpected)`);
           }
         } catch {
-          // ignore parse errors
+          console.warn("[bridge] failed to parse canvas response as JSON");
         }
       });
 
