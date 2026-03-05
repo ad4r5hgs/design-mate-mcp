@@ -28,6 +28,16 @@ import {
   persistSectionMap,
 } from "./section-manager";
 import { createFlatShape } from "./shape-factory";
+import {
+  DEFAULT_FRAME_WIDTH,
+  DEFAULT_FRAME_HEIGHT,
+  DEFAULT_GEO_WIDTH,
+  DEFAULT_GEO_HEIGHT,
+  DEFAULT_TEXT_WIDTH,
+  DEFAULT_TEXT_HEIGHT,
+  DEFAULT_FONT_SIZE,
+  ZOOM_ANIMATION_DURATION_MS,
+} from "./defaults";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -120,8 +130,8 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               borderColor: p.borderColor as string,
               borderWidth: p.borderWidth as number,
               name: p.name as string,
-              width: op.width || (p.width as number) || 400,
-              height: op.height || (p.height as number) || 300,
+              width: op.width || (p.width as number) || DEFAULT_FRAME_WIDTH,
+              height: op.height || (p.height as number) || DEFAULT_FRAME_HEIGHT,
               overflow: "hidden",
               children: p.children as PenNode[],
               boxShadow: p.boxShadow as string,
@@ -134,8 +144,8 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               resolvedRoot,
               op.x || 0,
               resolvedY,
-              (op.width || (p.width as number) || 400),
-              (op.height || (p.height as number) || 300),
+              (op.width || (p.width as number) || DEFAULT_FRAME_WIDTH),
+              (op.height || (p.height as number) || DEFAULT_FRAME_HEIGHT),
             );
 
             const createdIds: string[] = [];
@@ -180,8 +190,8 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               x: op.x || 0,
               y: resolvedY,
               props: {
-                w: op.width || 400,
-                h: op.height || 300,
+                w: op.width || DEFAULT_FRAME_WIDTH,
+                h: op.height || DEFAULT_FRAME_HEIGHT,
                 name: "",
                 fill: (p.fill as string) || "transparent",
                 cornerRadius: (p.cornerRadius as number) || 0,
@@ -200,11 +210,11 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               x: op.x || 0,
               y: resolvedY,
               props: {
-                w: op.width || 200,
-                h: op.height || 24,
+                w: op.width || DEFAULT_TEXT_WIDTH,
+                h: op.height || DEFAULT_TEXT_HEIGHT,
                 content: (p.content as string) || "Text",
                 fill: (p.fill as string) || (p.color as string) || "#000000",
-                fontSize: (p.fontSize as number) || 16,
+                fontSize: (p.fontSize as number) || DEFAULT_FONT_SIZE,
                 fontFamily: (p.fontFamily as string) || "Inter, sans-serif",
                 fontWeight: (p.fontWeight as string) || "normal",
                 textAlign: (p.textAlign as string) || "left",
@@ -223,8 +233,8 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
               y: resolvedY,
               props: {
                 geo: ((p.geo as string) || "rectangle") as TLGeoShape["props"]["geo"],
-                w: op.width || 200,
-                h: op.height || 200,
+                w: op.width || DEFAULT_GEO_WIDTH,
+                h: op.height || DEFAULT_GEO_HEIGHT,
                 color: ((p.color as string) || "black") as TLGeoShape["props"]["color"],
                 fill: ((p.fill as string) || "none") as TLGeoShape["props"]["fill"],
                 ...(p.text ? { richText: toRichText(p.text as string) } : {}),
@@ -289,7 +299,7 @@ export function handleBatch(editor: Editor, cmd: BatchCommand): Record<string, u
     }
   }
 
-  try { editor.zoomToFit({ animation: { duration: 200 } }); } catch { }
+  try { editor.zoomToFit({ animation: { duration: ZOOM_ANIMATION_DURATION_MS } }); } catch { }
   return {
     requestId: cmd.requestId,
     results,

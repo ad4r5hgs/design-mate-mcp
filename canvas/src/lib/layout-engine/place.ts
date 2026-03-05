@@ -8,6 +8,7 @@
 
 import type { MeasuredNode, FlatShape, LayoutWarning } from "./types";
 import { pad, normalizeAlignItems, normalizeJustifyContent } from "./normalize";
+import { DEFAULT_FONT_SIZE } from "../../engine/defaults";
 import { measureText } from "./text-measure";
 
 /** Shared context passed to every node placer */
@@ -56,7 +57,7 @@ function placeTextNode(
         props: {
             content: n.content || "",
             fill: n.color || n.fill || "#000000",
-            fontSize: n.fontSize || 16,
+            fontSize: n.fontSize || DEFAULT_FONT_SIZE,
             fontFamily: n.fontFamily || "Inter, sans-serif",
             fontWeight: n.fontWeight || "normal",
             textAlign: n.textAlign || "left",
@@ -207,8 +208,8 @@ function placeFrameNode(
 // Add a new node type here — no other file needs to change.
 
 const placers: Record<string, NodePlacerFn> = {
-    text:  placeTextNode,
-    icon:  placeIconNode,
+    text: placeTextNode,
+    icon: placeIconNode,
     image: placeImageNode,
     frame: placeFrameNode,
 };

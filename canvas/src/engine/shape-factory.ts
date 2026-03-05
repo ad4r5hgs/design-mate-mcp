@@ -14,6 +14,7 @@
 import { createShapeId, type Editor, type TLShapeId } from "tldraw";
 import { PEN_FRAME_TYPE } from "../shapes/PenFrameUtil";
 import { PEN_TEXT_TYPE } from "../shapes/PenTextUtil";
+import { DEFAULT_FONT_SIZE } from "./defaults";
 import { PEN_ICON_TYPE } from "../shapes/PenIconUtil";
 import { PEN_IMAGE_TYPE } from "../shapes/PenImageUtil";
 import type { FlatShape } from "../lib/layout-engine";
@@ -58,7 +59,7 @@ function createTextShape(editor: Editor, id: TLShapeId, flat: FlatShape): void {
       h: flat.h,
       content: (flat.props.content as string) || "",
       fill: (flat.props.fill as string) || "#000000",
-      fontSize: (flat.props.fontSize as number) || 16,
+      fontSize: (flat.props.fontSize as number) || DEFAULT_FONT_SIZE,
       fontFamily: (flat.props.fontFamily as string) || "Inter, sans-serif",
       fontWeight: (flat.props.fontWeight as string) || "normal",
       textAlign: (flat.props.textAlign as string) || "left",
@@ -108,8 +109,8 @@ function createImageShape(editor: Editor, id: TLShapeId, flat: FlatShape): void 
 
 const shapeCreators: Record<string, ShapeCreatorFn> = {
   "pen-frame": createFrameShape,
-  "pen-text":  createTextShape,
-  "pen-icon":  createIconShape,
+  "pen-text": createTextShape,
+  "pen-icon": createIconShape,
   "pen-image": createImageShape,
 };
 

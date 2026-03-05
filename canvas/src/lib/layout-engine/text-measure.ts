@@ -2,6 +2,7 @@
 
 import type { PenNode } from "./types";
 import { normalizeFontWeight } from "./normalize";
+import { DEFAULT_FONT_SIZE } from "../../engine/defaults";
 
 let _canvas: HTMLCanvasElement | null = null;
 let _ctx: CanvasRenderingContext2D | null = null;
@@ -16,7 +17,7 @@ function getCtx(): CanvasRenderingContext2D {
 
 function setFont(ctx: CanvasRenderingContext2D, node: PenNode): void {
     const weight = normalizeFontWeight(node.fontWeight);
-    const size = node.fontSize || 16;
+    const size = node.fontSize || DEFAULT_FONT_SIZE;
     const family = node.fontFamily || "Inter, sans-serif";
     ctx.font = `${weight} ${size}px ${family}`;
 }
@@ -65,7 +66,7 @@ export function measureText(node: PenNode, maxWidth: number): { w: number; h: nu
 
     const text = node.content || "";
     const lh = node.lineHeight || 1.5;
-    const size = node.fontSize || 16;
+    const size = node.fontSize || DEFAULT_FONT_SIZE;
     const lineH = Math.ceil(size * lh);
 
     if (text.length === 0) return { w: 0, h: lineH };

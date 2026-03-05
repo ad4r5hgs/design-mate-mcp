@@ -18,6 +18,16 @@ import { PEN_FRAME_TYPE } from "../shapes/PenFrameUtil";
 import { PEN_TEXT_TYPE } from "../shapes/PenTextUtil";
 import { clearSectionMaps, registerSection } from "./section-manager";
 import { createFlatShape } from "./shape-factory";
+import {
+  DEFAULT_FRAME_WIDTH,
+  DEFAULT_FRAME_HEIGHT,
+  DEFAULT_GEO_WIDTH,
+  DEFAULT_GEO_HEIGHT,
+  DEFAULT_TEXT_WIDTH,
+  DEFAULT_TEXT_HEIGHT,
+  DEFAULT_FONT_SIZE,
+  ZOOM_ANIMATION_DURATION_MS,
+} from "./defaults";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -51,8 +61,8 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
           name: shape.name as string,
           gap: shape.gap as number,
           padding: shape.padding as number | number[],
-          width: (shape.width as number) || 400,
-          height: (shape.height as number) || 300,
+          width: (shape.width as number) || DEFAULT_FRAME_WIDTH,
+          height: (shape.height as number) || DEFAULT_FRAME_HEIGHT,
           children: shape.children as PenNode[],
         };
 
@@ -62,8 +72,8 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
           resolvedRoot,
           (shape.x as number) || 0,
           (shape.y as number) || 0,
-          (shape.width as number) || 400,
-          (shape.height as number) || 300,
+          (shape.width as number) || DEFAULT_FRAME_WIDTH,
+          (shape.height as number) || DEFAULT_FRAME_HEIGHT,
         );
 
         const ids: string[] = [];
@@ -82,8 +92,8 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
           x: (shape.x as number) || 0,
           y: (shape.y as number) || 0,
           props: {
-            w: (shape.width as number) || 400,
-            h: (shape.height as number) || 300,
+            w: (shape.width as number) || DEFAULT_FRAME_WIDTH,
+            h: (shape.height as number) || DEFAULT_FRAME_HEIGHT,
             name: (shape.name as string) || "",
             fill: (shape.fill as string) || "transparent",
             cornerRadius: (shape.cornerRadius as number) || 0,
@@ -100,11 +110,11 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
           x: (shape.x as number) || 0,
           y: (shape.y as number) || 0,
           props: {
-            w: (shape.width as number) || 200,
-            h: (shape.height as number) || 24,
+            w: (shape.width as number) || DEFAULT_TEXT_WIDTH,
+            h: (shape.height as number) || DEFAULT_TEXT_HEIGHT,
             content: (shape.content as string) || "Text",
             fill: (shape.fill as string) || "#000000",
-            fontSize: (shape.fontSize as number) || 16,
+            fontSize: (shape.fontSize as number) || DEFAULT_FONT_SIZE,
             fontFamily: (shape.fontFamily as string) || "Inter, sans-serif",
             fontWeight: (shape.fontWeight as string) || "normal",
             textAlign: (shape.textAlign as string) || "left",
@@ -122,8 +132,8 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
           y: (shape.y as number) || 0,
           props: {
             geo: ((shape.geo as string) || "rectangle") as TLGeoShape["props"]["geo"],
-            w: (shape.width as number) || 200,
-            h: (shape.height as number) || 200,
+            w: (shape.width as number) || DEFAULT_GEO_WIDTH,
+            h: (shape.height as number) || DEFAULT_GEO_HEIGHT,
             color: ((shape.color as string) || "black") as TLGeoShape["props"]["color"],
             fill: ((shape.fill as string) || "none") as TLGeoShape["props"]["fill"],
           },
@@ -146,7 +156,7 @@ export function handleSingle(editor: Editor, cmd: SingleCommand): Record<string,
       return { ...base, cleared: true };
 
     case "zoom_to_fit":
-      editor.zoomToFit({ animation: { duration: 200 } });
+      editor.zoomToFit({ animation: { duration: ZOOM_ANIMATION_DURATION_MS } });
       return { ...base, zoomed: true };
 
     case "export":

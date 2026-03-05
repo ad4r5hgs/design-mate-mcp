@@ -10,7 +10,17 @@
 
 import { WebSocketServer, WebSocket } from "ws";
 
-const PORT = Number(process.env.WS_PORT) || 4000;
+// ─── Configuration ───────────────────────────────────────────────────────────
+// These mirror the constants in canvas/src/constants.ts but are defined locally
+// because ws-server.ts runs as a standalone Node process (not bundled with the
+// canvas React app), so it cannot import from the canvas source tree.
+
+const DEFAULT_WS_PORT = 4000;
+const WS_LOG_INITIAL_COUNT = 5;
+const WS_LOG_INTERVAL = 100;
+const WS_REJECT_LOG_LIMIT = 20;
+
+const PORT = Number(process.env.WS_PORT) || DEFAULT_WS_PORT;
 const wss = new WebSocketServer({ port: PORT });
 
 const clients = new Set<WebSocket>();
@@ -60,15 +70,14 @@ wss.on("connection", (ws) => {
     // ── Perimeter validation — reject malformed messages before relay ──
     const validated = validateRelayMessage(raw);
     if (!validated) {
-      // Only log first few rejections to avoid flooding on noisy bad clients
-      if (messageCount <= 20) {
+      if (messageCount <= WS_REJECT_LOG_LIMIT) {
         console.warn(`[ws] rejected malformed message #${messageCount} (invalid JSON or missing type/requestId)`);
       }
       return; // Drop — do NOT relay to other clients
     }
 
-    // Only log every 100th message to avoid terminal flooding
-    if (messageCount <= 5 || messageCount % 100 === 0) {
+    // Only log every Nth message to avoid terminal flooding
+    if (messageCount <= WS_LOG_INITIAL_COUNT || messageCount % WS_LOG_INTERVAL === 0) {
       console.log(`[ws] relaying message to ${clients.size - 1} client(s) (total: ${messageCount})`);
     }
 

@@ -118,9 +118,10 @@ export class CanvasBridge {
     return new Promise((resolve, reject) => {
       this.ws = new WebSocket(this.url);
 
+      const BRIDGE_CONNECT_TIMEOUT_MS = 5000;
       const connectionTimeout = setTimeout(() => {
         reject(new Error(`Connection timeout: Could not connect to canvas at ${this.url}. Make sure the canvas is running (cd canvas && bun run dev)`));
-      }, 5000);
+      }, BRIDGE_CONNECT_TIMEOUT_MS);
 
       this.ws.on("open", () => {
         clearTimeout(connectionTimeout);

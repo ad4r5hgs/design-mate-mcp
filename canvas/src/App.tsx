@@ -14,7 +14,7 @@
 import { useCallback } from "react";
 import { Tldraw, Editor } from "tldraw";
 import "tldraw/tldraw.css";
-import { WS_URL, CUSTOM_SHAPE_UTILS } from "./constants";
+import { WS_URL, CUSTOM_SHAPE_UTILS, WS_RECONNECT_DELAY_MS } from "./constants";
 import { PropertiesPanel } from "./components/PropertiesPanel";
 import { TopBar } from "./components/TopBar";
 import { ChatDrawer } from "./components/ChatDrawer";
@@ -96,7 +96,7 @@ function connectWebSocket(editor: Editor) {
   ws.onopen = () => console.log("[ws] connected");
   ws.onclose = () => {
     if (activeWs === ws) activeWs = null;
-    setTimeout(() => connectWebSocket(editor), 2000);
+    setTimeout(() => connectWebSocket(editor), WS_RECONNECT_DELAY_MS);
   };
 
   ws.onmessage = async (event) => {

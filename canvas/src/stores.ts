@@ -16,6 +16,7 @@
 
 import { create } from "zustand";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
+import { DEFAULT_CHAT_PANEL_WIDTH } from "./constants";
 
 // ─── Store shape ─────────────────────────────────────────────────────────────
 
@@ -47,7 +48,7 @@ export const useCanvasStore = create<CanvasStore>()(
                 // Initial state
                 filename: "Untitled",
                 chatOpen: false,
-                chatPanelWidth: 280,
+                chatPanelWidth: DEFAULT_CHAT_PANEL_WIDTH,
                 hasSelection: false,
 
                 // Actions
