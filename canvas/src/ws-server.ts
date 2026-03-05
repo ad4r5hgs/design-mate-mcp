@@ -35,7 +35,9 @@ let messageCount = 0;
  * Checks:
  * 1. Is it valid JSON?
  * 2. Is it an object (not a primitive or array)?
- * 3. Does it have `type` (string) and `requestId` (string)?
+ * 3. Does it have at least one of `type` (string) or `requestId` (string)?
+ *    - Commands have `type` + `requestId`
+ *    - Responses may only have `requestId` + data
  */
 function validateRelayMessage(raw: string): Record<string, unknown> | null {
   let parsed: unknown;
@@ -50,8 +52,11 @@ function validateRelayMessage(raw: string): Record<string, unknown> | null {
   }
 
   const obj = parsed as Record<string, unknown>;
-  if (typeof obj.type !== "string" || typeof obj.requestId !== "string") {
-    return null; // Missing required envelope fields
+  const hasType = typeof obj.type === "string";
+  const hasRequestId = typeof obj.requestId === "string";
+
+  if (!hasType && !hasRequestId) {
+    return null; // Must have at least one identifier
   }
 
   return obj;
