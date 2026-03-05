@@ -95,12 +95,24 @@ export interface ScreenshotResult {
   height: number;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Bridge
-// ─────────────────────────────────────────────────────────────────────────────
+import {
+  DEFAULT_WS_URL,
+  BRIDGE_CONNECT_TIMEOUT_MS,
+  BRIDGE_REQUEST_TIMEOUT_MS,
+  LOG_TRUNCATION_LENGTH,
+} from "./constants.js";
 
 type MessageHandler = (data: unknown) => void;
 
+// ─── Bridge ──────────────────────────────────────────────────────────────────
+
+/**
+ * Two-way WebSocket bridge between the MCP server and the tldraw canvas.
+ *
+ * Implements request-response semantics over WebSocket by assigning each
+ * outgoing command a unique requestId and routing the corresponding reply
+ * to the correct Promise.
+ */
 export class CanvasBridge {
   private ws: WebSocket | null = null;
   private url: string;
@@ -108,7 +120,7 @@ export class CanvasBridge {
   private requestId = 0;
   private connected = false;
 
-  constructor(url: string = "ws://localhost:4000") {
+  constructor(url: string = DEFAULT_WS_URL) {
     this.url = url;
   }
 
@@ -118,7 +130,6 @@ export class CanvasBridge {
     return new Promise((resolve, reject) => {
       this.ws = new WebSocket(this.url);
 
-      const BRIDGE_CONNECT_TIMEOUT_MS = 5000;
       const connectionTimeout = setTimeout(() => {
         reject(new Error(`Connection timeout: Could not connect to canvas at ${this.url}. Make sure the canvas is running (cd canvas && bun run dev)`));
       }, BRIDGE_CONNECT_TIMEOUT_MS);
@@ -140,7 +151,7 @@ export class CanvasBridge {
           }
 
           if (typeof msg.requestId !== "string") {
-            console.warn("[bridge] dropped response without valid requestId:", JSON.stringify(msg).slice(0, 100));
+            console.warn("[bridge] dropped response without valid requestId:", JSON.stringify(msg).slice(0, LOG_TRUNCATION_LENGTH));
             return;
           }
 
@@ -186,8 +197,8 @@ export class CanvasBridge {
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         this.handlers.delete(requestId);
-        reject(new Error(`Request timeout: Widget did not respond within 30s for command '${command.type}'`));
-      }, 30000);  // 30s for screenshots (image export can be slow)
+        reject(new Error(`Request timeout: Widget did not respond within ${BRIDGE_REQUEST_TIMEOUT_MS / 1000}s for command '${command.type}'`));
+      }, BRIDGE_REQUEST_TIMEOUT_MS);  // Generous timeout — screenshot/image export can be slow
 
       this.handlers.set(requestId, (data) => {
         clearTimeout(timeout);

@@ -26,7 +26,9 @@ import { registerCatalog } from "./tools/catalog.js";
 // Initialize
 // ─────────────────────────────────────────────────────────────────────────────
 
-const bridge = new CanvasBridge(process.env.TLDRAW_WS_URL || "ws://localhost:4000");
+import { DEFAULT_WS_URL } from "./constants.js";
+
+const bridge = new CanvasBridge(process.env.TLDRAW_WS_URL || DEFAULT_WS_URL);
 
 const server = new McpServer({
   name: "designmate-mcp",
