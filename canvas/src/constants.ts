@@ -15,6 +15,10 @@ export const CUSTOM_SHAPE_UTILS = [PenFrameUtil, PenTextUtil, PenIconUtil, PenIm
 /** localStorage key for the section name map (rootShapeId → sectionName). */
 export const SECTION_MAP_KEY = "tldraw-mcp-section-map";
 
+/** IndexedDB persistence key — tldraw auto-saves/loads all shapes and assets
+ *  under this key. Syncs across browser tabs sharing the same key. */
+export const PERSISTENCE_KEY = "designmate-canvas";
+
 /** localStorage key for the section shapes map (rootShapeId → [all shape IDs]). */
 export const SECTION_SHAPES_KEY = "tldraw-mcp-section-shapes";
 

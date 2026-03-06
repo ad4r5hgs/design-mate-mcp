@@ -14,7 +14,7 @@
 import { useCallback } from "react";
 import { Tldraw, Editor } from "tldraw";
 import "tldraw/tldraw.css";
-import { WS_URL, CUSTOM_SHAPE_UTILS, WS_RECONNECT_DELAY_MS } from "./constants";
+import { WS_URL, CUSTOM_SHAPE_UTILS, WS_RECONNECT_DELAY_MS, PERSISTENCE_KEY } from "./constants";
 import { PropertiesPanel } from "./components/PropertiesPanel";
 import { TopBar } from "./components/TopBar";
 import { ChatDrawer } from "./components/ChatDrawer";
@@ -166,7 +166,7 @@ export function App() {
         bottom: 0,
         transition: "right 0.0s",
       }}>
-        <Tldraw onMount={handleMount} shapeUtils={CUSTOM_SHAPE_UTILS} components={customComponents} />
+        <Tldraw persistenceKey={PERSISTENCE_KEY} onMount={handleMount} shapeUtils={CUSTOM_SHAPE_UTILS} components={customComponents} />
       </div>
       <ChatDrawer />
     </div>
